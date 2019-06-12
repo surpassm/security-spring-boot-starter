@@ -44,18 +44,13 @@ public class ValidateUtil {
 
     /**
      * 效验手机号码是否为1开头和11位
-     *
-     * @param str
-     * @return
      */
     public static boolean isMobilePhone(String str) {
         return StringUtils.isNotBlank(str) && P_MOBILE_PHONE.matcher(str).matches();
     }
 
     /**
-     * @param str
-     * @return
-     * @描述：真实姓名校验
+     * 描述：真实姓名校验
      */
     public static boolean isRealName(String str) {
         return str != null && REALRNAME.matcher(str).matches();
@@ -69,9 +64,7 @@ public class ValidateUtil {
     }
 
     /**
-     * @param str
-     * @return
-     * @描述：银行卡号校验
+     * 描述：银行卡号校验
      */
     public static boolean isBankCode(String str) {
         return str != null && BANKCODE.matcher(str).matches();

@@ -23,9 +23,6 @@ public class LiaoinExpiredSessionStrategy extends AbstractSessionStrategy implem
 
 	/**
 	 * 接口可以取得超时事件或自定义并发登陆处理
-	 * @param event
-	 * @throws IOException
-	 * @throws ServletException
 	 */
 	@Override
 	public void onExpiredSessionDetected(SessionInformationExpiredEvent event) throws IOException, ServletException {

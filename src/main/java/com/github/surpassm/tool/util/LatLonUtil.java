@@ -29,12 +29,11 @@ public class LatLonUtil {
     private static final double RAD = Math.PI / 180.0;
     /**
      * 
-     * @Description:根据经纬度和半径计算经纬度范围
-     * @param lat
-     * @param lon
+     * Description:根据经纬度和半径计算经纬度范围
+     * @param lat s
+     * @param lon s
      * @param raidus 单位米(半径)
      * @return double[minLat, minLng, maxLat, maxLng] 
-     * @throws
      */
     public static Map<String,Double> getAround(double lat, double lon, int raidus) {
     	
@@ -64,13 +63,12 @@ public class LatLonUtil {
 	}
     /**
      * 
-     * @Description:计算任意两点(经纬度)距离
+     * Description:计算任意两点(经纬度)距离
      * @param long1 第一个经度
      * @param lat1 第一个纬度
      * @param long2 第二经度
      * @param lat2 第二纬度
      * @return double 
-     * @throws
      */
     public static double distanceByLongNLat(double long1, double lat1, double long2, double lat2) {
         double a, b;
@@ -95,11 +93,6 @@ public class LatLonUtil {
 	}
 	/**
 	 * 计算两个经纬度之间的距离
-	 * @param lat1
-	 * @param lng1
-	 * @param lat2
-	 * @param lng2
-	 * @return
 	 */
 	public static double GetDistance(double lat1, double lng1, double lat2, double lng2){
 
@@ -116,15 +109,9 @@ public class LatLonUtil {
 
 	/**
 	 * 计算是否在圆上（单位/千米）
-	 *
-	 * @Title: GetDistance
-	 * @Description: TODO()
 	 * @param radius 半径
 	 * @param lat1  纬度
 	 * @param lng1  经度
-	 * @return
-	 * @return double
-	 * @throws
 	 */
 	public static boolean isInCircle(double radius,double lat1, double lng1, double lat2, double lng2)
 	{
@@ -141,17 +128,12 @@ public class LatLonUtil {
 
 	/**
 	 * 是否在矩形区域内
-	 * @Title: isInArea
-	 * @Description: TODO()
 	 * @param lat 测试点经度
 	 * @param lng 测试点纬度
 	 * @param minLat 纬度范围限制1
 	 * @param maxLat 纬度范围限制2
 	 * @param minLng 经度限制范围1
 	 * @param maxLng 经度范围限制2
-	 * @return
-	 * @return boolean
-	 * @throws
 	 */
 	public static boolean isInRectangleArea(double lat,double lng,double minLat,
 											double maxLat,double minLng,double maxLng){
@@ -187,14 +169,6 @@ public class LatLonUtil {
 
 	/**
 	 * 判断是否在经纬度范围内
-	 * @Title: isInRange
-	 * @Description: TODO()
-	 * @param point
-	 * @param left
-	 * @param right
-	 * @return
-	 * @return boolean
-	 * @throws
 	 */
 	public static boolean isInRange(double point, double left,double right){
 		if(point>=Math.min(left, right)&&point<=Math.max(left, right)){
@@ -207,13 +181,8 @@ public class LatLonUtil {
 
 	/**
 	 * 判断点是否在多边形内
-	 * @Title: IsPointInPoly
-	 * @Description: TODO()
 	 * @param point 测试点
 	 * @param pts 多边形的点
-	 * @return
-	 * @return boolean
-	 * @throws
 	 */
 	public static boolean isInPolygon(Point2D.Double point, List<Point2D.Double> pts){
 

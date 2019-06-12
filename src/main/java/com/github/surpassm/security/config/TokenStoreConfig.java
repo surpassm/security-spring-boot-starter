@@ -41,7 +41,6 @@ public class TokenStoreConfig {
         private SecurityProperties securityProperties;
         /**
          * token存储
-         * @return
          */
         @Bean
         public TokenStore jwtTokenStore(){
@@ -50,7 +49,6 @@ public class TokenStoreConfig {
 
         /**
          * token处理
-         * @return
          */
         @Bean
         public JwtAccessTokenConverter jwtAccessTokenConverter(){
@@ -61,7 +59,6 @@ public class TokenStoreConfig {
 
         /**
          * 往jwt token中加入数据
-         * @return
          */
         @Bean
         @ConditionalOnMissingBean(name = "jwtTokenEnhancer")

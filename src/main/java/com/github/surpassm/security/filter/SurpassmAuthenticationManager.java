@@ -54,10 +54,6 @@ public class SurpassmAuthenticationManager extends UsernamePasswordAuthenticatio
 
 	/**
 	 * 可以获取request
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws AuthenticationException
 	 */
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
@@ -66,12 +62,6 @@ public class SurpassmAuthenticationManager extends UsernamePasswordAuthenticatio
 
 	/**
 	 * 成功验证后调用的方法
-	 * @param request
-	 * @param response
-	 * @param chain
-	 * @param authResult
-	 * @throws IOException
-	 * @throws ServletException
 	 */
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
@@ -80,11 +70,6 @@ public class SurpassmAuthenticationManager extends UsernamePasswordAuthenticatio
 
 	/**
 	 * 验证失败时候调用的方法
-	 * @param request
-	 * @param response
-	 * @param failed
-	 * @throws IOException
-	 * @throws ServletException
 	 */
 	@Override
 	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {

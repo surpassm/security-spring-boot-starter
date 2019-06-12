@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 
 /**
  * @author mc
- * @version 1.0
- * @date 2018/8/21 10:03
- * @description
+ * version 1.0
+ * date 2018/8/21 10:03
+ * description
  */
 @Data
 @Builder

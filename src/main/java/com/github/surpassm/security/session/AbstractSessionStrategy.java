@@ -42,9 +42,6 @@ public class AbstractSessionStrategy {
 	
 	private ObjectMapper objectMapper = new ObjectMapper();
 
-	/**
-	 * @param invalidSessionUrl
-	 */
 	public AbstractSessionStrategy(String invalidSessionUrl) {
 		Assert.isTrue(UrlUtils.isValidRedirectUrl(invalidSessionUrl), "url must start with '/' or with 'http(s)'");
 		this.destinationUrl = invalidSessionUrl;
@@ -78,7 +75,6 @@ public class AbstractSessionStrategy {
 
 	/**
 	 * session失效是否是并发导致的
-	 * @return
 	 */
 	protected boolean isConcurrency() {
 		return false;

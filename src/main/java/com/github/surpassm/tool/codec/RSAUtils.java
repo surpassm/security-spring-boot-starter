@@ -46,6 +46,10 @@ public class RSAUtils {
 
 	/**
 	 * 生成密钥对(公钥和私钥)
+	 * @param rsaPublicKey s
+	 * @param rsaPrivateKey s
+	 * @return s
+	 * @throws Exception s
 	 */
 	public static Map<String, Object> genKeyPair(String rsaPublicKey,String rsaPrivateKey) throws Exception {
 		KeyPairGenerator keyPairGen = KeyPairGenerator.getInstance(KEY_ALGORITHM);
@@ -63,6 +67,7 @@ public class RSAUtils {
 	 * 用私钥对信息生成数字签名
 	 * @param data       已加密数据
 	 * @param privateKey 私钥(BASE64编码)
+	 * @throws Exception s
 	 */
 	public static String sign(byte[] data, String privateKey) throws Exception {
 		byte[] keyBytes = Base64.decodeBase64(privateKey);
@@ -80,6 +85,7 @@ public class RSAUtils {
 	 * @param data      已加密数据
 	 * @param publicKey 公钥(BASE64编码)
 	 * @param sign      数字签名
+	 * @throws Exception s
 	 */
 	public static boolean verify(byte[] data, String publicKey, String sign) throws Exception {
 		byte[] keyBytes = Base64.decodeBase64(publicKey);
@@ -96,6 +102,7 @@ public class RSAUtils {
 	 * 私钥解密
 	 * @param encryptedData 已加密数据
 	 * @param privateKey    私钥(BASE64编码)
+	 * @throws Exception s
 	 */
 	public static byte[] decryptByPrivateKey(byte[] encryptedData, String privateKey) throws Exception {
 		byte[] keyBytes = Base64.decodeBase64(privateKey);
@@ -129,6 +136,7 @@ public class RSAUtils {
 	 * 公钥解密
 	 * @param encryptedData 已加密数据
 	 * @param publicKey     公钥(BASE64编码)
+	 * @throws Exception s
 	 */
 	public static byte[] decryptByPublicKey(byte[] encryptedData, String publicKey) throws Exception {
 		byte[] keyBytes = Base64.decodeBase64(publicKey);
@@ -162,6 +170,7 @@ public class RSAUtils {
 	 * 公钥加密
 	 * @param data      源数据
 	 * @param publicKey 公钥(BASE64编码)
+	 * @throws Exception s
 	 */
 	public static byte[] encryptByPublicKey(byte[] data, String publicKey) throws Exception {
 		byte[] keyBytes = Base64.decodeBase64(publicKey);
@@ -196,6 +205,7 @@ public class RSAUtils {
 	 * 私钥加密
 	 * @param data       源数据
 	 * @param privateKey 私钥(BASE64编码)
+	 * @throws Exception s
 	 */
 	public static byte[] encryptByPrivateKey(byte[] data, String privateKey) throws Exception {
 		byte[] keyBytes = Base64.decodeBase64(privateKey);
@@ -228,6 +238,7 @@ public class RSAUtils {
 	/**
 	 * 获取私钥
 	 * @param keyMap 密钥对
+	 * @throws Exception s
 	 */
 	public static String getPrivateKey(Map<String, Object> keyMap,String privateKey) throws Exception {
 		Key key = (Key) keyMap.get(privateKey);
@@ -237,6 +248,7 @@ public class RSAUtils {
 	/**
 	 * 获取公钥
 	 * @param keyMap 密钥对
+	 * @throws Exception s
 	 */
 	public static String getPublicKey(Map<String, Object> keyMap,String publicKey) throws Exception {
 		Key key = (Key) keyMap.get(publicKey);

@@ -24,17 +24,18 @@ public class DesEncryptUtil {
 	 * Description 根据键值进行加密
 	 * @param data 数据
 	 * @param key  加密键byte数组
+	 * @throws Exception      ss
 	 */
 	public static String encrypt(String data, String key) throws Exception {
 		byte[] bt = encrypt(data.getBytes(), key.getBytes());
-		String strs = new BASE64Encoder().encode(bt);
-		return strs;
+		return new BASE64Encoder().encode(bt);
 	}
 
 	/**
 	 * Description 根据键值进行解密
 	 * @param data 数据
 	 * @param key  加密键byte数组
+	 * @throws Exception ss
 	 */
 	public static String decrypt(String data, String key) throws IOException,
 			Exception {
@@ -51,6 +52,7 @@ public class DesEncryptUtil {
 	 * Description 根据键值进行加密
 	 * @param data 数据
 	 * @param key  加密键byte数组
+	 * @throws Exception ss
 	 */
 	private static byte[] encrypt(byte[] data, byte[] key) throws Exception {
 		// 生成一个可信任的随机数源
@@ -77,6 +79,7 @@ public class DesEncryptUtil {
 	 * Description 根据键值进行解密
 	 * @param data 数据
 	 * @param key  加密键byte数组
+	 * @throws Exception ss
 	 */
 	private static byte[] decrypt(byte[] data, byte[] key) throws Exception {
 		// 生成一个可信任的随机数源

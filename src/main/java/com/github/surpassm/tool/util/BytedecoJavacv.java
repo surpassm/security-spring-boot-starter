@@ -39,8 +39,8 @@ public class BytedecoJavacv {
      * @param hour:指定时
      * @param min:指定分
      * @param sec:指定秒
-     * @throws IOException
-     * @throws InterruptedException
+     * @throws IOException a
+     * @throws InterruptedException a
      */
     public static void getThumbWindows(String videoFilename, String thumbFilename, int width, int height, int hour, int min, float sec) throws IOException,InterruptedException {
         ProcessBuilder processBuilder = new ProcessBuilder(ffmpegApp, "-y",
@@ -67,10 +67,10 @@ public class BytedecoJavacv {
 
     /**
      *
-     * @param inFile
-     * @param outFile
-     * @param startTime
-     * @return
+     * @param inFile a
+     * @param outFile a
+     * @param startTime a
+     * @return a
      */
     public static boolean getThumbLinux(String inFile, String outFile,String startTime) {
         String command = "ffmpeg -i " + inFile
@@ -96,7 +96,7 @@ public class BytedecoJavacv {
 
     /**
      * 获取指定视频的帧并保存为图片至指定目录
-     * @throws Exception
+     * @throws Exception a
      */
     public static String randomGrabberFFmpegImage(String filePath, String targerFilePath, String targetFileName)
             throws Exception {
@@ -156,8 +156,8 @@ public class BytedecoJavacv {
 
     /**
      * 获取视频时长
-     * @param source
-     * @return
+     * @param source a
+     * @return a
      */
     private String ReadVideoTime(File source) {
 //        Encoder encoder = new Encoder();
@@ -178,8 +178,8 @@ public class BytedecoJavacv {
 
     /**
      * 获取视频大小
-     * @param source
-     * @return
+     * @param source a
+     * @return a
      */
     private String ReadVideoSize(File source) {
         FileChannel fc= null;
