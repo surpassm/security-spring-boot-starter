@@ -111,5 +111,18 @@ logging:
   level:
     com.example.demo.mapper.user: trace
 ~~~
+在pom.xml配置
 
+~~~
+<dependency>
+    <groupId>com.github.surpassm</groupId>
+    <artifactId>security-spring-boot-starter</artifactId>
+    <version>0.0.1</version>
+</dependency>
+<dependency>
+    <groupId>com.github.surpassm</groupId>
+    <artifactId>config-spring-boot-starter</artifactId>
+    <version>0.0.1</version>
+</dependency>
+~~~
 可以参考 https://github.com/surpassm/parent-spring-boot-starter  demo-mybatis和demo-JPA示例使用
