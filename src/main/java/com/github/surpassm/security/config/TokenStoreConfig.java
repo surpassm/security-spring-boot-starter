@@ -39,17 +39,11 @@ public class TokenStoreConfig {
     public static class JwtTokenConfig{
         @Resource
         private SecurityProperties securityProperties;
-        /**
-         * token存储
-         */
         @Bean
         public TokenStore jwtTokenStore(){
             return new JwtTokenStore(jwtAccessTokenConverter());
         }
 
-        /**
-         * token处理
-         */
         @Bean
         public JwtAccessTokenConverter jwtAccessTokenConverter(){
             JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
@@ -57,9 +51,6 @@ public class TokenStoreConfig {
             return accessTokenConverter;
         }
 
-        /**
-         * 往jwt token中加入数据
-         */
         @Bean
         @ConditionalOnMissingBean(name = "jwtTokenEnhancer")
         public TokenEnhancer jwtTokenEnhancer(){

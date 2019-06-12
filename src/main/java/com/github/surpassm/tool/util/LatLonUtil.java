@@ -88,11 +88,23 @@ public class LatLonUtil {
 	 * 距离单位为：米
 	 */
 	private static double EARTH_RADIUS1 = 6371.393;
+
+	/**
+	 *
+	 * @param d s
+	 * @return s
+	 */
 	private static double rad(double d){
 		return d * Math.PI / 180.0;
 	}
+
 	/**
 	 * 计算两个经纬度之间的距离
+	 * @param lat1 s
+	 * @param lng1 s
+	 * @param lat2 s
+	 * @param lng2 s
+	 * @return s
 	 */
 	public static double GetDistance(double lat1, double lng1, double lat2, double lng2){
 
@@ -110,8 +122,11 @@ public class LatLonUtil {
 	/**
 	 * 计算是否在圆上（单位/千米）
 	 * @param radius 半径
-	 * @param lat1  纬度
-	 * @param lng1  经度
+	 * @param lat1 纬度
+	 * @param lng1 经度
+	 * @param lat2 纬度
+	 * @param lng2 经度
+	 * @return as
 	 */
 	public static boolean isInCircle(double radius,double lat1, double lng1, double lat2, double lng2)
 	{
@@ -134,6 +149,7 @@ public class LatLonUtil {
 	 * @param maxLat 纬度范围限制2
 	 * @param minLng 经度限制范围1
 	 * @param maxLng 经度范围限制2
+	 * @return
 	 */
 	public static boolean isInRectangleArea(double lat,double lng,double minLat,
 											double maxLat,double minLng,double maxLng){
@@ -169,6 +185,10 @@ public class LatLonUtil {
 
 	/**
 	 * 判断是否在经纬度范围内
+	 * @param point s
+	 * @param left s
+	 * @param right s
+	 * @return s
 	 */
 	public static boolean isInRange(double point, double left,double right){
 		if(point>=Math.min(left, right)&&point<=Math.max(left, right)){
@@ -183,6 +203,7 @@ public class LatLonUtil {
 	 * 判断点是否在多边形内
 	 * @param point 测试点
 	 * @param pts 多边形的点
+	 * @return s
 	 */
 	public static boolean isInPolygon(Point2D.Double point, List<Point2D.Double> pts){
 

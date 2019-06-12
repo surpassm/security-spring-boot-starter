@@ -15,7 +15,7 @@ public class OrderUtil extends Thread{
 	private static String date ;
 	/**
 	 * 生成订单编号
-	 * @return
+	 * @return a
 	 */
 	public static synchronized String getOrderNo() {
 		String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());

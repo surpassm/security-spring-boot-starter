@@ -25,6 +25,7 @@ public class DesEncryptUtil {
 	 * @param data 数据
 	 * @param key  加密键byte数组
 	 * @throws Exception      ss
+	 * @return s
 	 */
 	public static String encrypt(String data, String key) throws Exception {
 		byte[] bt = encrypt(data.getBytes(), key.getBytes());
@@ -36,8 +37,9 @@ public class DesEncryptUtil {
 	 * @param data 数据
 	 * @param key  加密键byte数组
 	 * @throws Exception ss
+	 * @return s
 	 */
-	public static String decrypt(String data, String key) throws IOException,
+	public static String decrypt(String data, String key) throws
 			Exception {
 		if (data == null) {
 			return null;
@@ -53,6 +55,7 @@ public class DesEncryptUtil {
 	 * @param data 数据
 	 * @param key  加密键byte数组
 	 * @throws Exception ss
+	 * @return s
 	 */
 	private static byte[] encrypt(byte[] data, byte[] key) throws Exception {
 		// 生成一个可信任的随机数源
@@ -80,6 +83,7 @@ public class DesEncryptUtil {
 	 * @param data 数据
 	 * @param key  加密键byte数组
 	 * @throws Exception ss
+	 * @return s
 	 */
 	private static byte[] decrypt(byte[] data, byte[] key) throws Exception {
 		// 生成一个可信任的随机数源

@@ -94,10 +94,14 @@ public class BytedecoJavacv {
     }
 
 
-    /**
-     * 获取指定视频的帧并保存为图片至指定目录
-     * @throws Exception a
-     */
+	/**
+	 * 获取指定视频的帧并保存为图片至指定目录
+	 * @param filePath  s
+	 * @param targerFilePath s
+	 * @param targetFileName s
+	 * @return s
+	 * @throws Exception s
+	 */
     public static String randomGrabberFFmpegImage(String filePath, String targerFilePath, String targetFileName)
             throws Exception {
         FFmpegFrameGrabber ff = FFmpegFrameGrabber.createDefault(filePath);

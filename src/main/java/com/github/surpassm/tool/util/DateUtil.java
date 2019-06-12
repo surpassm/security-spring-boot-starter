@@ -25,30 +25,41 @@ public class DateUtil {
 
 	/**
 	 * 返回当前的日期
+	 * @return s
 	 */
 	public static LocalDate getCurrentLocalDate() {
 		return LocalDate.now();
 	}
 	/**
 	 * 返回当前时间
+	 * @return s
 	 */
 	public static LocalTime getCurrentLocalTime() {
 		return LocalTime.now();
 	}
 	/**
 	 * 返回当前日期时间
+	 * @return s
 	 */
 	public static LocalDateTime getCurrentLocalDateTime() {
 		return LocalDateTime.now();
 	}
+
 	/**
 	 * 日期相隔秒
+	 * @param startDateTime s
+	 * @param endDateTime s
+	 * @return s
 	 */
 	public static long periodHours(LocalDateTime startDateTime,LocalDateTime endDateTime){
 		return Duration.between(startDateTime, endDateTime).get(ChronoUnit.SECONDS);
 	}
+
 	/**
 	 * 日期相隔天数
+	 * @param startDate s
+	 * @param endDate s
+	 * @return s
 	 */
 	public static long periodDays(LocalDate startDate, LocalDate endDate) {
 		return startDate.until(endDate, ChronoUnit.DAYS);
@@ -56,6 +67,9 @@ public class DateUtil {
 
 	/**
 	 * 日期相隔周数
+	 * @param startDate s
+	 * @param endDate s
+	 * @return s
 	 */
 	public static long periodWeeks(LocalDate startDate, LocalDate endDate) {
 		return startDate.until(endDate, ChronoUnit.WEEKS);
@@ -63,6 +77,9 @@ public class DateUtil {
 
 	/**
 	 * 日期相隔月数
+	 * @param startDate s
+	 * @param endDate s
+	 * @return s
 	 */
 	public static long periodMonths(LocalDate startDate, LocalDate endDate) {
 		return startDate.until(endDate, ChronoUnit.MONTHS);
@@ -70,6 +87,9 @@ public class DateUtil {
 
 	/**
 	 * 日期相隔年数
+	 * @param startDate s
+	 * @param endDate s
+	 * @return s
 	 */
 	public static long periodYears(LocalDate startDate, LocalDate endDate) {
 		return startDate.until(endDate, ChronoUnit.YEARS);
@@ -77,12 +97,17 @@ public class DateUtil {
 
 	/**
 	 * 是否当天
+	 * @param date s
+	 * @return s
 	 */
 	public static boolean isToday(LocalDate date) {
 		return getCurrentLocalDate().equals(date);
 	}
+
 	/**
 	 * 获取当前毫秒数
+	 * @param dateTime s
+	 * @return s
 	 */
 	public static Long toEpochMilli(LocalDateTime dateTime) {
 		return dateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
@@ -90,6 +115,8 @@ public class DateUtil {
 
 	/**
 	 * 判断是否为闰年
+	 * @param localDate s
+	 * @return s
 	 */
 	public static boolean isLeapYear(LocalDate localDate){
 		return localDate.isLeapYear();
@@ -97,26 +124,38 @@ public class DateUtil {
 
 	/**
 	 * 将时间yyyy-MM-dd转换为时间戳
+	 * @param s s
+	 * @return s
 	 */
 	public static Long dateToStamp(String s){
 		return LocalDate.parse(s,DATE_FORMATTER).atStartOfDay(ZoneId.systemDefault()).toInstant().toEpochMilli();
 	}
+
 	/**
 	 * 将时间yyyy-MM-dd HH:mm转换为时间戳
+	 * @param s s
+	 * @return s
 	 */
 	public static Long dateToStampEndM(String s){
 		return LocalDateTime.parse(s,DATETIME_FORMATTER_MINUTE).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
 	}
+
 	/**
 	 * 将时间戳转化为时间
+	 * @param timestamp s
+	 * @return s
 	 */
 	public static LocalDateTime getDateTimeOfTimestamp(long timestamp) {
 		Instant instant = Instant.ofEpochMilli(timestamp);
 		ZoneId zone = ZoneId.systemDefault();
 		return LocalDateTime.ofInstant(instant, zone);
 	}
+
 	/**
-	 * 将某时间字符串转为自定义时间格式的LocalDateTime
+	 * 将某时间字符串转为自定义时间格式的Loc alDateTime
+	 * @param time s
+	 * @param format s
+	 * @return s
 	 */
 	public static LocalDateTime parseStringToDateTime(String time, String format) {
 		DateTimeFormatter df = DateTimeFormatter.ofPattern(format);
@@ -125,57 +164,83 @@ public class DateUtil {
 
 	/**
 	 * 将LocalDateTime转为自定义的时间格式的字符串
+	 * @param localDateTime s
+	 * @param format s
+	 * @return s
 	 */
-
 	public static String getDateTimeAsString(LocalDateTime localDateTime, String format) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
 		return localDateTime.format(formatter);
 	}
+
 	/**
 	 * 计算两个日期之间相差
+	 * @param start s
+	 * @param end s
+	 * @return s
 	 */
 	public static Duration getLocalDateTimeBetween(LocalDateTime start,LocalDateTime end) {
 		return Duration.between(start,end);
 	}
+
 	/**
 	 * 计算两个日期之间相差的天数
+	 * @param start s
+	 * @param end s
+	 * @return s
 	 */
 	public static Long daysBetween(LocalDateTime start,LocalDateTime end){
 		Duration duration = getLocalDateTimeBetween(start, end);
 		return duration.toDays();
 	}
+
 	/**
 	 * 获取当天开始时间
+	 * @return s
 	 */
 	public static LocalDateTime getStartTime() {
 		return LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
 	}
+
 	/**
 	 * 获取当天结束时间
+	 * @return s
 	 */
 	public static LocalDateTime getEndTime() {
 		return LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
 	}
+
 	/**
 	 * 获取指定时间开始时间
+	 * @param date s
+	 * @return s
 	 */
 	public static LocalDateTime getStartTime(LocalDate date) {
 		return LocalDateTime.of(date, LocalTime.MIN);
 	}
+
 	/**
 	 * 获取指定时间结束时间
+	 * @param date s
+	 * @return s
 	 */
 	public static LocalDateTime getEndTime(LocalDate date) {
 		return LocalDateTime.of(date, LocalTime.MAX);
 	}
+
 	/**
 	 * 字符串转时间yyyy-MM-dd
+	 * @param s s
+	 * @return s
 	 */
 	public static LocalDate toLocalDate(String s){
 		return LocalDate.parse(s,DATE_FORMATTER);
 	}
+
 	/**
 	 * 字符串转时间yyyy-MM-dd HH:mm:ss
+	 * @param s s
+	 * @return s
 	 */
 	public static LocalDateTime toLocalDateTime(String s){
 		return LocalDateTime.parse(s,DATETIME_FORMATTER);
@@ -191,7 +256,7 @@ public class DateUtil {
 	 * @param smdate 较小的时间
 	 * @param bdate  较大的时间
 	 * @return 相差天数
-	 * @throws ParseException
+	 * @throws ParseException s
 	 */
 	public static int daysBetween(Date smdate, Date bdate) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -202,8 +267,8 @@ public class DateUtil {
 		long time1 = cal.getTimeInMillis();
 		cal.setTime(bdate);
 		long time2 = cal.getTimeInMillis();
-		long between_days = (time2 - time1) / (1000 * 3600 * 24);
-		return Integer.parseInt(String.valueOf(between_days));
+		long betweenDays = (time2 - time1) / (1000 * 3600 * 24);
+		return Integer.parseInt(String.valueOf(betweenDays));
 	}
 
 	/**
@@ -212,7 +277,6 @@ public class DateUtil {
 	 * @param smdate 较小的时间
 	 * @param bdate  较大的时间
 	 * @return 相差天数
-	 * @throws ParseException
 	 */
 	public static long hourBetween(Long smdate, Long bdate) {
 		long diff = smdate - bdate;
@@ -220,7 +284,11 @@ public class DateUtil {
 	}
 
 	/**
-	 * 字符串的日期格式的计算
+	 * .字符串的日期格式的计算
+	 * @param smdate s
+	 * @param bdate s
+	 * @return s
+	 * @throws ParseException s
 	 */
 	public static int daysBetween(String smdate, String bdate) throws ParseException {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -236,6 +304,8 @@ public class DateUtil {
 
 	/**
 	 * 日期加一个月
+	 * @param date s
+	 * @return s
 	 */
 	public static Date addOneMonth(Date date) {
 		Calendar calendar = new GregorianCalendar();
@@ -247,6 +317,8 @@ public class DateUtil {
 
 	/**
 	 * 获取一天开始时间
+	 * @param date s
+	 * @return s
 	 */
 	public static Date getStartTime(Date date) {
 		Calendar todayStart = Calendar.getInstance();
@@ -260,8 +332,8 @@ public class DateUtil {
 
 	/**
 	 * 获取一天结束时间
-	 *
-	 * @return
+	 * @param date s
+	 * @return s
 	 */
 	public static Date getEndTime(Date date) {
 		Calendar todayEnd = Calendar.getInstance();
@@ -275,6 +347,8 @@ public class DateUtil {
 
 	/**
 	 * 获取昨天天开始时间
+	 * @param date s
+	 * @return s
 	 */
 	public static Date getYesterdayStartTime(Date date) {
 		Calendar todayStart = Calendar.getInstance();
@@ -289,8 +363,8 @@ public class DateUtil {
 
 	/**
 	 * 获取昨天结束时间
-	 *
-	 * @return
+	 * @param date s
+	 * @return s
 	 */
 	public static Date getYesterdayEndTime(Date date) {
 		Calendar todayEnd = Calendar.getInstance();
@@ -305,6 +379,8 @@ public class DateUtil {
 
 	/**
 	 * 获取昨天天开始时间
+	 * @param date s
+	 * @return s
 	 */
 	public static Date getFiveStartTime(Date date) {
 		Calendar todayStart = Calendar.getInstance();
@@ -335,9 +411,8 @@ public class DateUtil {
 
 	/**
 	 * 获取当月第一天
-	 *
-	 * @param date
-	 * @return
+	 * @param date s
+	 * @return s
 	 */
 	public static Date getMonthStart(Date date) {
 		Calendar monthStart = Calendar.getInstance();
@@ -354,8 +429,8 @@ public class DateUtil {
 	/**
 	 * 获取下月第一天
 	 *
-	 * @param date
-	 * @return
+	 * @param date s
+	 * @return s
 	 */
 	public static Date getNextMonthStart(Date date) {
 		Calendar nextMonthStart = Calendar.getInstance();
@@ -388,9 +463,9 @@ public class DateUtil {
 
 	/**
 	 * 获取day数后的日期
-	 *
-	 * @param day
-	 * @return
+	 * @param date s
+	 * @param day s
+	 * @return s
 	 */
 	public static Date getDayNumber(Date date,Integer day) {
 		Calendar calendar = Calendar.getInstance();

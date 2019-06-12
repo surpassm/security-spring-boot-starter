@@ -73,9 +73,6 @@ public class AbstractSessionStrategy {
 		
 	}
 
-	/**
-	 * session失效是否是并发导致的
-	 */
 	protected boolean isConcurrency() {
 		return false;
 	}

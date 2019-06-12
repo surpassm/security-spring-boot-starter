@@ -18,8 +18,8 @@ public class JsonUtils {
     /**
      * 将对象转换成json字符串
      * Title: pojoToJson
-     * @param data
-     * @return
+     * @param data a
+     * @return a
      */
     public static String objectToJson(Object data,ObjectMapper mapper) {
         try {
@@ -31,12 +31,14 @@ public class JsonUtils {
         return null;
     }
 
-    /**
-     * 将json结果集转化为对象
-     * @param jsonData json数据
-     * @param beanType 对象中的object类型
-     * @return
-     */
+	/**
+	 * 将json结果集转化为对象
+	 * @param jsonData json数据
+	 * @param beanType 对象中的object类型
+	 * @param mapper 转换对象
+	 * @param <T> s
+	 * @return s
+	 */
     public static <T> T jsonToPojo(String jsonData, Class<T> beanType,ObjectMapper mapper) {
         try {
             T t = mapper.readValue(jsonData, beanType);
@@ -48,13 +50,14 @@ public class JsonUtils {
     }
 
 
-    /**
-     * 将json数据转换成pojo对象list
-     * @param jsonData
-     * @param beanType
-     * @param <T>
-     * @return
-     */
+	/**
+	 * 将json数据转换成pojo对象list
+	 * @param jsonData s
+	 * @param beanType s
+	 * @param mapper s
+	 * @param <T> s
+	 * @return s
+	 */
     public static <T>List<T> jsonToList(String jsonData, Class<T> beanType,ObjectMapper mapper) {
         JavaType javaType = mapper.getTypeFactory().constructParametricType(List.class, beanType);
         try {

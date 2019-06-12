@@ -57,45 +57,48 @@ public class FileUtils {
 
 	/**
 	 * 获取当前系统日期
+	 * @return s
 	 */
 	public static String nowDate() {
 		return DateUtil.getDateTimeAsString(LocalDateTime.now(),"yyyy-MM-dd");
 	}
 
-    /**
-     * 获取项目根路径
-     */
-    public static String rootPath() throws Exception {
+	/**
+	 * 获取项目根路径
+	 * @return s
+	 * @throws Exception s
+	 */
+	public static String rootPath() throws Exception {
         // 参数为空
         File directory = new File("");
         return directory.getCanonicalPath();
     }
 
-    /**
-     * 获取请求http
-     *
-     * @param request
-     * @return
-     */
-    public static String http(HttpServletRequest request) {
+	/**
+	 * 获取请求http
+	 * @param request s
+	 * @return s
+	 */
+	public static String http(HttpServletRequest request) {
         return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
     }
 
-    /**
-     * 获取文件名称
-     */
-    public static String getFileName(MultipartFile file) {
+	/**
+	 * 获取文件名称
+	 * @param file s
+	 * @return s
+	 */
+	public static String getFileName(MultipartFile file) {
         String filename = file.getOriginalFilename().replace("." + getFileType(file), "");
         return filename;
     }
 
-    /**
-     * 删除文件
-     *
-     * @param filePath
-     * @return
-     * @throws Exception
-     */
+	/**
+	 * 删除文件
+	 * @param filePath s
+	 * @return s
+	 * @throws Exception s
+	 */
     public static boolean delFile(String filePath) throws Exception {
         if (StringUtils.isEmpty(filePath)) {
             return false;

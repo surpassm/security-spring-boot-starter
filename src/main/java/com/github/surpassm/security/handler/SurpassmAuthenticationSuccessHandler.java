@@ -31,8 +31,8 @@ import java.util.Map;
  * 自定义登陆成功配置
  * 继承AuthenticationSuccessHandler
  * 默认成功处理器：SavedRequestAwareAuthenticationSuccessHandler
- * @author mc
- * @date 2018/08/27 7:11
+ * author mc
+ * date 2018/08/27 7:11
  */
 @Component("surpassmAuthenticationSuccessHandler")
 public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
@@ -53,11 +53,6 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 
     /**
      * 该方法在登陆成功以后会被调用
-     * @param request
-     * @param response
-     * @param authentication 用户信息
-     * @throws IOException
-     * @throws ServletException
      */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,

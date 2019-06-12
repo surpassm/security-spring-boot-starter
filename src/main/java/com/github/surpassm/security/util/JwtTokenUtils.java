@@ -34,10 +34,7 @@ public class JwtTokenUtils implements Serializable {
 	 */
     private static final long EXPIRATION_REMEMBER = 604800L;
 
-
-	/**
-	 * 创建Token 只带用户名
-	 */
+	//创建Token 只带用户名
     public static String createToken(String userId,boolean isRememberMe){
         long expiration = isRememberMe ? EXPIRATION_REMEMBER : EXPIRATION;
 		//创建Token令牌
@@ -54,9 +51,7 @@ public class JwtTokenUtils implements Serializable {
                 .compact();
     }
 
-	/**
-	 * 获取用户id
-	 */
+    //获取用户id
 	public static String getUsernameFromToken(String token){
 		//解析Token的payload
 		Claims claims = Jwts.parser()
@@ -66,9 +61,8 @@ public class JwtTokenUtils implements Serializable {
 
 		return  claims.get(AUTHORITIES_KEY).toString();
 	}
-	/**
-	 * 验证Token是否正确
-	 */
+
+	//验证Token是否正确
 	public static boolean validateToken(String token){
 		try {
 			//通过密钥验证Token
@@ -91,11 +85,12 @@ public class JwtTokenUtils implements Serializable {
 	}
 
 
-
-
 	/**
 	 * 生成token 可以携带资源和设置过期时间
 	 * @param subject  用户名
+	 * @param claims s
+	 * @param expiration s
+	 * @return s
 	 */
 	public static String generateAccessToken(String subject, Map<String, Object> claims, Integer expiration) {
 		return generateToken(subject, claims, expiration);
@@ -118,6 +113,8 @@ public class JwtTokenUtils implements Serializable {
 
 	/**
 	 * 生成失效时间
+	 * @param expiration s
+	 * @return s
 	 */
 	private static Date generateExpirationDate(long expiration) {
 		return new Date(System.currentTimeMillis() + expiration);
@@ -125,6 +122,8 @@ public class JwtTokenUtils implements Serializable {
 
 	/**
 	 * 根据token 获取生成时间
+	 * @param token s
+	 * @return s
 	 */
 	public Date getCreatedDateFromToken(String token) {
 		Date created;
@@ -139,6 +138,8 @@ public class JwtTokenUtils implements Serializable {
 
 	/**
 	 * token 是否过期
+	 * @param token s
+	 * @return s
 	 */
 	private Boolean isTokenExpired(String token) {
 		final Date expiration = getExpirationDateFromToken(token);
@@ -147,6 +148,8 @@ public class JwtTokenUtils implements Serializable {
 
 	/**
 	 * 根据token 获取过期时间
+	 * @param token s
+	 * @return s
 	 */
 	public Date getExpirationDateFromToken(String token) {
 		Date expiration;
@@ -161,6 +164,9 @@ public class JwtTokenUtils implements Serializable {
 
 	/**
 	 * 重置(更新)token 过期时间
+	 * @param token s
+	 * @param expiration s
+	 * @return s
 	 */
 	public String restTokenExpired(String token,long expiration){
 
@@ -176,8 +182,10 @@ public class JwtTokenUtils implements Serializable {
 		return "";
 	}
 
-	/***
+	/**
 	 * 解析token 信息
+	 * @param token s
+	 * @return s
 	 */
 	public static Claims getClaimsFromToken(String token) {
 		Claims claims;

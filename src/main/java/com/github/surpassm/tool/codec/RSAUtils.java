@@ -68,6 +68,7 @@ public class RSAUtils {
 	 * @param data       已加密数据
 	 * @param privateKey 私钥(BASE64编码)
 	 * @throws Exception s
+	 * @return s
 	 */
 	public static String sign(byte[] data, String privateKey) throws Exception {
 		byte[] keyBytes = Base64.decodeBase64(privateKey);
@@ -86,6 +87,7 @@ public class RSAUtils {
 	 * @param publicKey 公钥(BASE64编码)
 	 * @param sign      数字签名
 	 * @throws Exception s
+	 * @return s
 	 */
 	public static boolean verify(byte[] data, String publicKey, String sign) throws Exception {
 		byte[] keyBytes = Base64.decodeBase64(publicKey);
@@ -103,6 +105,7 @@ public class RSAUtils {
 	 * @param encryptedData 已加密数据
 	 * @param privateKey    私钥(BASE64编码)
 	 * @throws Exception s
+	 * @return s
 	 */
 	public static byte[] decryptByPrivateKey(byte[] encryptedData, String privateKey) throws Exception {
 		byte[] keyBytes = Base64.decodeBase64(privateKey);
@@ -137,6 +140,7 @@ public class RSAUtils {
 	 * @param encryptedData 已加密数据
 	 * @param publicKey     公钥(BASE64编码)
 	 * @throws Exception s
+	 * @return s
 	 */
 	public static byte[] decryptByPublicKey(byte[] encryptedData, String publicKey) throws Exception {
 		byte[] keyBytes = Base64.decodeBase64(publicKey);
@@ -171,6 +175,7 @@ public class RSAUtils {
 	 * @param data      源数据
 	 * @param publicKey 公钥(BASE64编码)
 	 * @throws Exception s
+	 * @return s
 	 */
 	public static byte[] encryptByPublicKey(byte[] data, String publicKey) throws Exception {
 		byte[] keyBytes = Base64.decodeBase64(publicKey);
@@ -206,6 +211,7 @@ public class RSAUtils {
 	 * @param data       源数据
 	 * @param privateKey 私钥(BASE64编码)
 	 * @throws Exception s
+	 * @return s
 	 */
 	public static byte[] encryptByPrivateKey(byte[] data, String privateKey) throws Exception {
 		byte[] keyBytes = Base64.decodeBase64(privateKey);
@@ -238,6 +244,8 @@ public class RSAUtils {
 	/**
 	 * 获取私钥
 	 * @param keyMap 密钥对
+	 * @param privateKey s
+	 * @return s
 	 * @throws Exception s
 	 */
 	public static String getPrivateKey(Map<String, Object> keyMap,String privateKey) throws Exception {
@@ -248,6 +256,8 @@ public class RSAUtils {
 	/**
 	 * 获取公钥
 	 * @param keyMap 密钥对
+	 * @param publicKey s
+	 * @return s
 	 * @throws Exception s
 	 */
 	public static String getPublicKey(Map<String, Object> keyMap,String publicKey) throws Exception {
@@ -257,6 +267,9 @@ public class RSAUtils {
 
 	/**
 	 * java端公钥加密
+	 * @param data s
+	 * @param publickey s
+	 * @return s
 	 */
 	public static String encryptedDataOnJava(String data, String publickey) {
 		try {
@@ -270,6 +283,9 @@ public class RSAUtils {
 
 	/**
 	 * java端私钥解密
+	 * @param data s
+	 * @param privatekey s
+	 * @return s
 	 */
 	public static String decryptDataOnJava(String data, String privatekey) {
 		String temp = "";

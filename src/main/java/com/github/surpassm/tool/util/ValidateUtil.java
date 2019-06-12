@@ -35,38 +35,49 @@ public class ValidateUtil {
     private static final Pattern IDENTITY_NO = Pattern.compile("(^[1-9]\\d{5}(18|19|([23]\\d))\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{3}[0-9Xx]$)|(^[1-9]\\d{5}\\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\\d{2}$)");
 
 
-    /**
-     * 校验身份证是否合法(包含15 18位)
-     */
-    public static boolean isIdentityNo(String identityNo) {
+	/**
+	 * 校验身份证是否合法(包含15 18位)
+	 * @param identityNo a
+	 * @return a
+	 */
+	public static boolean isIdentityNo(String identityNo) {
         return StringUtils.isNotBlank(identityNo) && IDENTITY_NO.matcher(identityNo).matches();
     }
 
-    /**
-     * 效验手机号码是否为1开头和11位
-     */
-    public static boolean isMobilePhone(String str) {
+	/**
+	 * 效验手机号码是否为1开头和11位
+	 * @param str s
+	 * @return s
+	 */
+	public static boolean isMobilePhone(String str) {
         return StringUtils.isNotBlank(str) && P_MOBILE_PHONE.matcher(str).matches();
     }
 
-    /**
-     * 描述：真实姓名校验
-     */
-    public static boolean isRealName(String str) {
+	/**
+	 * 描述：真实姓名校验
+	 * @param str a
+	 * @return a
+	 */
+	public static boolean isRealName(String str) {
         return str != null && REALRNAME.matcher(str).matches();
     }
 
-    /**
-     * 密码校验：匹配小写字母、大写字母、数字、特殊符号的两种及两种以上【非中文】
-     */
-    public static boolean isPassword(String str) {
+	/**
+	 * 密码校验：匹配小写字母、大写字母、数字、特殊符号的两种及两种
+	 * 以上【非中文】
+	 * @param str a
+	 * @return a
+	 */
+	public static boolean isPassword(String str) {
         return str != null && PASSWORD.matcher(str).matches();
     }
 
-    /**
-     * 描述：银行卡号校验
-     */
-    public static boolean isBankCode(String str) {
+	/**
+	 * 描述：银行卡号校验
+	 * @param str a
+	 * @return a
+	 */
+	public static boolean isBankCode(String str) {
         return str != null && BANKCODE.matcher(str).matches();
     }
 }

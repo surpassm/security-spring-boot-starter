@@ -52,11 +52,13 @@ public class ZipUtil {
 	}
 
 	/**
-	 * 解压缩一个文件
-	 * @param zipFile 压缩文件
-	 * @param folderPath 解压缩的目标目录
-	 * @throws IOException
-	 * @throws ZipException
+	 * 	 * 解压缩一个文件
+	 * 	 * @param zipFile 压缩文件
+	 * 	 * @param folderPath 解压缩的目标目录
+	 * @param zipFile s
+	 * @param folderPath  s
+	 * @throws ZipException s
+	 * @throws IOException s
 	 */
 	public static void upZipFile(File zipFile, String folderPath) throws ZipException, IOException {
 		// 根据路径创建一个文件
@@ -103,6 +105,7 @@ public class ZipUtil {
 	 * @param nameContains 传入的文件匹配名
 	 * @throws ZipException 压缩格式有误时抛出
 	 * @throws IOException IO错误时抛出
+	 * @return s
 	 */
 	public static ArrayList<File> upZipSelectedFile(File zipFile, String folderPath,
 													String nameContains) throws ZipException, IOException {
@@ -150,7 +153,7 @@ public class ZipUtil {
 	 * @param resFile 需要压缩的文件(夹)
 	 * @param zipOut 压缩的目的文件
 	 * @param rootPath 压缩的文件路径
-	 * @throws IOException
+	 * @throws IOException s
 	 */
 	private static void zipFile(File resFile, ZipOutputStream zipOut, String rootPath) throws IOException {
 		// 判断文件路径长度是否大于0， 大于0时string为"/", 等于0时为""
@@ -185,8 +188,8 @@ public class ZipUtil {
 	 * 获得压缩文件内文件列表
 	 * @param zipFile 压缩文件
 	 * @return 压缩文件内文件名称
-	 * @throws IOException
-	 * @throws ZipException
+	 * @throws IOException s
+	 * @throws ZipException s
 	 */
 	public static ArrayList<String> getEntriesNames(File zipFile) throws ZipException, IOException {
 		ArrayList<String> entryNames = new ArrayList<>();
@@ -203,7 +206,7 @@ public class ZipUtil {
 	 * 获得压缩文件对象的名称
 	 * @param entry 压缩文件对象
 	 * @return 压缩文件对象的名称
-	 * @throws UnsupportedEncodingException
+	 * @throws UnsupportedEncodingException s
 	 */
 	private static String getEntryName(ZipEntry entry) throws UnsupportedEncodingException {
 		return new String(entry.getName().getBytes("GB2312"), "8859_1");
@@ -213,7 +216,7 @@ public class ZipUtil {
 	 * 取得压缩文件对象的注释
 	 * @param entry 压缩文件对象
 	 * @return 压缩文件对象的注释
-	 * @throws UnsupportedEncodingException
+	 * @throws UnsupportedEncodingException s
 	 */
 	public static String getEntryComment(ZipEntry entry) throws UnsupportedEncodingException {
 		return new String(entry.getComment().getBytes("GB2312"), "8859_1");
@@ -223,8 +226,8 @@ public class ZipUtil {
 	 * 获得压缩文件内压缩文件对象以取得其属性
 	 * @param zipFile 压缩文件
 	 * @return 返回一个压缩文件列表
-	 * @throws IOException
-	 * @throws ZipException
+	 * @throws IOException s
+	 * @throws ZipException s
 	 */
 	private static Enumeration<?> getEntriesEnumeration(File zipFile) throws ZipException, IOException {
 		ZipFile zf = new ZipFile(zipFile);
