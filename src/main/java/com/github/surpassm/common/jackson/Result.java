@@ -3,6 +3,7 @@ package com.github.surpassm.common.jackson;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.github.surpassm.common.constant.Constant;
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -15,7 +16,7 @@ import lombok.Data;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Result{
+public class Result<T>{
 	/**
 	 * 响应业务状态
 	 */
@@ -29,9 +30,9 @@ public class Result{
 	/**
 	 * 响应中的数据
 	 */
-	private Object data="";
+	private T data;
 
-	public Result(Object data) {
+	public Result(T data) {
 		this.code = Constant.SUCCESS_CODE;
 		this.message = Constant.SUCCESS_MSG;
 		this.data = data;
@@ -42,7 +43,7 @@ public class Result{
 		this.message = message;
 	}
 
-	public Result(Integer code, String message, Object data) {
+	public Result(Integer code, String message, T data) {
 		this.code = code;
 		this.message = message;
 		this.data = data;
@@ -51,6 +52,7 @@ public class Result{
 	public static Result ok(Object data) {
 		return new Result(data);
 	}
+
 
 	public static Result ok() {
 		return new Result("");
@@ -67,19 +69,24 @@ public class Result{
 		return new Result(code, msg);
 	}
 
-
-
 	public static Result fail(Object data) {
 		return new Result(Constant.FAIL_CODE, Constant.FAIL_MSG, data);
 	}
 
-	public Object getData() {
-		return data;
-	}
 
-	public void setData(Object data) {
-		this.data = data;
-	}
 
+
+	public static Result ok(ResultCode code) {
+		return new Result(code.getCode(),code.getMsg());
+	}
+	public static <T> Result<T> ok(ResultCode code,T t) {
+		return new Result(code.getCode(),code.getMsg(),t);
+	}
+	public static Result fail(ResultCode code) {
+		return new Result(code.getCode(), code.getMsg());
+	}
+	public static <T> Result<T> fail(ResultCode code,T t) {
+		return new Result(code.getCode(),code.getMsg(),t);
+	}
 
 }
