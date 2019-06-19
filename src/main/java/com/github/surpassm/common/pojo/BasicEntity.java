@@ -3,6 +3,7 @@ package com.github.surpassm.common.pojo;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 
 /**
@@ -14,6 +15,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @SuppressWarnings("serial")
+@MappedSuperclass
 public class BasicEntity implements Serializable {
 
 	private Integer isDelete;
