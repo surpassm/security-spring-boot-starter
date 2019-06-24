@@ -4,7 +4,8 @@
 package com.github.surpassm.security.session;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.surpassm.common.jackson.Result;
+import com.github.surpassm.common.jackson.BaseResultFactory;
+import com.github.surpassm.common.jackson.ResultCode;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +69,8 @@ public class AbstractSessionStrategy {
 			//session已失效 状态码返回
 			response.setStatus(HttpStatus.OK.value());
 			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().write(objectMapper.writeValueAsString(new Result(HttpStatus.UNAUTHORIZED.value(),message,"")));
+			response.getWriter().write(objectMapper.writeValueAsString(BaseResultFactory.getInstance()
+					.build(ResultCode.USER_SESSION_ERROR.getCode(),ResultCode.USER_SESSION_ERROR.getMsg(),"","")));
 		}
 		
 	}

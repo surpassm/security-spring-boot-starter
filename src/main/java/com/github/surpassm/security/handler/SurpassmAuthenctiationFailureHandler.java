@@ -1,7 +1,8 @@
 package com.github.surpassm.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.surpassm.common.jackson.Result;
+import com.github.surpassm.common.jackson.BaseResultFactory;
+import com.github.surpassm.common.jackson.ResultCode;
 import com.github.surpassm.security.enums.LoginResponseType;
 import com.github.surpassm.security.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,7 @@ public class SurpassmAuthenctiationFailureHandler extends SimpleUrlAuthenticatio
             //设置返回状态码 默认返回状态码为200
             response.setStatus(HttpStatus.OK.value());
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(new Result(HttpStatus.UNAUTHORIZED.value(),exception.getMessage())));
+            response.getWriter().write(objectMapper.writeValueAsString(BaseResultFactory.getInstance().build(ResultCode.PERMISSION_NO_ACCESS.getCode(),ResultCode.PERMISSION_NO_ACCESS.getMsg(),"","")));
         }else{
             super.onAuthenticationFailure(request, response, exception);
         }

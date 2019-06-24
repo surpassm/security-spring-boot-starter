@@ -1,6 +1,8 @@
 package com.github.surpassm.security.controller;
 
-import com.github.surpassm.common.jackson.Result;
+import com.github.surpassm.common.jackson.AbstractBaseResult;
+import com.github.surpassm.common.jackson.BaseResultFactory;
+import com.github.surpassm.common.jackson.ResultCode;
 import com.github.surpassm.security.constants.SecurityConstants;
 import com.github.surpassm.security.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -53,7 +55,7 @@ public class SecurityController {
 	 */
 	@RequestMapping(SecurityConstants.DEFAULT_UNAUTHENTICATED_URL)
 	@ResponseStatus(code = HttpStatus.OK)
-	public Result requireAuthentication(HttpServletRequest request, HttpServletResponse response)throws IOException {
+	public AbstractBaseResult requireAuthentication(HttpServletRequest request, HttpServletResponse response)throws IOException {
 		//取出引发跳转的请求
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		if (savedRequest != null) {
@@ -65,6 +67,7 @@ public class SecurityController {
 				redirectStrategy.sendRedirect(request, response, securityProperties.getLoginPage());
 			}
 		}
-		return Result.fail(HttpStatus.UNAUTHORIZED.value(),"访问的服务需要身份认证，请刷新TOKEN");
+
+		return BaseResultFactory.getInstance().build(ResultCode.PERMISSION_NO_ACCESS.getCode(),ResultCode.PERMISSION_NO_ACCESS.getMsg(),"","");
 	}
 }

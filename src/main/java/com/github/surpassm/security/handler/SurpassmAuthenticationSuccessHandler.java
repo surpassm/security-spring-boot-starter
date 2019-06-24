@@ -1,7 +1,9 @@
 package com.github.surpassm.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.surpassm.common.jackson.Result;
+import com.github.surpassm.common.jackson.AbstractBaseDomain;
+import com.github.surpassm.common.jackson.BaseResultFactory;
+import com.github.surpassm.common.jackson.ResultCode;
 import com.github.surpassm.security.exception.SurpassmAuthenticationException;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -100,8 +102,7 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 		redisTokenStore.storeAccessToken(oAuth2AccessToken,oAuth2Authentication);
 		//返回前端JSON
 		response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(new Result(oAuth2AccessToken)));
-
+        response.getWriter().write(objectMapper.writeValueAsString(oAuth2AccessToken));
         /**第二套方案（基于jwt生成token返回用户标识）*/
 		/*//获取登陆成功的当前用户信息
 		User principal = (User) authentication.getPrincipal();
