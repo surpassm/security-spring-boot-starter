@@ -32,18 +32,18 @@ public class LiaoinLogoutSuccessHandler implements LogoutSuccessHandler {
     }
 
     @Override
-    public void onLogoutSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         logger.info("退出成功");
         String signOutUrl = securityProperties.getSignOutUrl();
         //判断路径是否为空
         if (StringUtils.isBlank(signOutUrl)){
             //传入JSON
-            httpServletResponse.setContentType("application/json;charset=UTF-8");
+			response.setContentType("application/json;charset=UTF-8");
 
-            httpServletResponse.getWriter().write(objectMapper.writeValueAsString(BaseResultFactory.getInstance().build(signOutUrl,null)));
+			response.getWriter().write(objectMapper.writeValueAsString(BaseResultFactory.getInstance(response).build(signOutUrl,null)));
         }else {
             //跳转路径
-            httpServletResponse.sendRedirect(signOutUrl);
+			response.sendRedirect(signOutUrl);
         }
     }
 }

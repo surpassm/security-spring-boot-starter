@@ -67,10 +67,10 @@ public class AbstractSessionStrategy {
 				message = message + "，有可能是并发登录导致的";
 			}
 			//session已失效 状态码返回
-			response.setStatus(HttpStatus.OK.value());
+			response.setStatus(HttpStatus.FORBIDDEN.value());
 			response.setContentType("application/json;charset=UTF-8");
-			response.getWriter().write(objectMapper.writeValueAsString(BaseResultFactory.getInstance()
-					.build(ResultCode.USER_SESSION_ERROR.getCode(),ResultCode.USER_SESSION_ERROR.getMsg(),"","")));
+			response.getWriter().write(objectMapper.writeValueAsString(BaseResultFactory.getInstance(response)
+					.build(HttpStatus.FORBIDDEN.value(),ResultCode.USER_SESSION_ERROR.getMsg(),"","")));
 		}
 		
 	}

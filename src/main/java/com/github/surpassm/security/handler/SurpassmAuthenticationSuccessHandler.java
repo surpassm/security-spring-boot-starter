@@ -1,9 +1,6 @@
 package com.github.surpassm.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.surpassm.common.jackson.AbstractBaseDomain;
-import com.github.surpassm.common.jackson.BaseResultFactory;
-import com.github.surpassm.common.jackson.ResultCode;
 import com.github.surpassm.security.exception.SurpassmAuthenticationException;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;

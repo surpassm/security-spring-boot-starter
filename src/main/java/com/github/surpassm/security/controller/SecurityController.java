@@ -54,7 +54,7 @@ public class SecurityController {
 	 * @throws IOException IOException
 	 */
 	@RequestMapping(SecurityConstants.DEFAULT_UNAUTHENTICATED_URL)
-	@ResponseStatus(code = HttpStatus.OK)
+	@ResponseStatus(code = HttpStatus.FORBIDDEN)
 	public AbstractBaseResult requireAuthentication(HttpServletRequest request, HttpServletResponse response)throws IOException {
 		//取出引发跳转的请求
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
@@ -67,7 +67,6 @@ public class SecurityController {
 				redirectStrategy.sendRedirect(request, response, securityProperties.getLoginPage());
 			}
 		}
-
-		return BaseResultFactory.getInstance().build(ResultCode.PERMISSION_NO_ACCESS.getCode(),ResultCode.PERMISSION_NO_ACCESS.getMsg(),"","");
+		return BaseResultFactory.getInstance(response).build(HttpStatus.FORBIDDEN.value(),ResultCode.PERMISSION_NO_ACCESS.getMsg(),"","");
 	}
 }

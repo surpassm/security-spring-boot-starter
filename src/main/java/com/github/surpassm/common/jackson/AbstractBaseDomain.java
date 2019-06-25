@@ -12,6 +12,6 @@ import java.io.Serializable;
  * Description
  */
 @Data
-public abstract class AbstractBaseDomain implements Serializable, OAuth2AccessToken {
+public abstract class AbstractBaseDomain implements Serializable{
 	private Long id;
 }
