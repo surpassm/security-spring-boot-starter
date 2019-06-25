@@ -1,8 +1,6 @@
 package com.github.surpassm.security.controller;
 
-import com.github.surpassm.common.jackson.AbstractBaseResult;
-import com.github.surpassm.common.jackson.BaseResultFactory;
-import com.github.surpassm.common.jackson.ResultCode;
+import com.github.surpassm.common.jackson.Result;
 import com.github.surpassm.security.constants.SecurityConstants;
 import com.github.surpassm.security.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
@@ -55,7 +53,7 @@ public class SecurityController {
 	 */
 	@RequestMapping(SecurityConstants.DEFAULT_UNAUTHENTICATED_URL)
 	@ResponseStatus(code = HttpStatus.FORBIDDEN)
-	public AbstractBaseResult requireAuthentication(HttpServletRequest request, HttpServletResponse response)throws IOException {
+	public Result requireAuthentication(HttpServletRequest request, HttpServletResponse response)throws IOException {
 		//取出引发跳转的请求
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
 		if (savedRequest != null) {
@@ -67,6 +65,6 @@ public class SecurityController {
 				redirectStrategy.sendRedirect(request, response, securityProperties.getLoginPage());
 			}
 		}
-		return BaseResultFactory.getInstance(response).build(HttpStatus.FORBIDDEN.value(),ResultCode.PERMISSION_NO_ACCESS.getMsg(),"","");
+		return new Result(HttpStatus.FORBIDDEN.value(),"无访问权限");
 	}
 }

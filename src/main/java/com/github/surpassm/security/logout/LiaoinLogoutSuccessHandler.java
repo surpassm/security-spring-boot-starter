@@ -1,7 +1,7 @@
 package com.github.surpassm.security.logout;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.surpassm.common.jackson.BaseResultFactory;
+import com.github.surpassm.common.jackson.Result;
 import com.github.surpassm.security.properties.SecurityProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -40,7 +40,7 @@ public class LiaoinLogoutSuccessHandler implements LogoutSuccessHandler {
             //传入JSON
 			response.setContentType("application/json;charset=UTF-8");
 
-			response.getWriter().write(objectMapper.writeValueAsString(BaseResultFactory.getInstance(response).build(signOutUrl,null)));
+			response.getWriter().write(objectMapper.writeValueAsString(new Result(signOutUrl)));
         }else {
             //跳转路径
 			response.sendRedirect(signOutUrl);
