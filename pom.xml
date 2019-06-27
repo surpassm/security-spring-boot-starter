@@ -95,6 +95,11 @@
             <artifactId>commons-collections4</artifactId>
             <version>${commons-collections4.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.github.surpassm</groupId>
+            <artifactId>common-spring-boot-starter</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 
 
