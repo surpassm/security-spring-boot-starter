@@ -1,7 +1,9 @@
 package com.github.surpassm.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.surpassm.common.tool.util.DateUtil;
 import com.github.surpassm.security.exception.SurpassmAuthenticationException;
+import com.github.surpassm.security.properties.SecurityProperties;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.util.encoders.Base64;
@@ -49,6 +51,8 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 	private TokenStore redisTokenStore;
 	@Resource
 	private AuthorizationServerTokenServices authorizationServerTokenServices;
+	@Resource
+	private SecurityProperties securityProperties;
 
     /**
      * 该方法在登陆成功以后会被调用
@@ -95,6 +99,8 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 		Map<String, Object> additionalInformation = new HashMap<>(16);
 		additionalInformation.put("userInfo",principal);
 		((DefaultOAuth2AccessToken)oAuth2AccessToken).setAdditionalInformation(additionalInformation);
+		//设置过期时间
+		((DefaultOAuth2AccessToken) oAuth2AccessToken).setExpiration(DateUtil.addOneHour(securityProperties.getExpirationToken()));
 		//存入redis缓存中
 		redisTokenStore.storeAccessToken(oAuth2AccessToken,oAuth2Authentication);
 		//返回前端JSON

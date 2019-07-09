@@ -35,4 +35,5 @@ public class Oauth2Properties {
 	private long expirationRemember = 604800L;
 
 	private String storeType;
+
 }
