@@ -38,7 +38,7 @@ public class SurpassmAuthenctiationFailureHandler extends SimpleUrlAuthenticatio
             //设置返回状态码 默认返回状态码为401
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(new Result(HttpStatus.UNAUTHORIZED.value(),ResultCode.PERMISSION_NO_ACCESS.getMsg())));
+            response.getWriter().write(objectMapper.writeValueAsString(new Result(HttpStatus.UNAUTHORIZED.value(),ResultCode.USER_LOGIN_ERROR.getMsg())));
         }else{
             super.onAuthenticationFailure(request, response, exception);
         }
