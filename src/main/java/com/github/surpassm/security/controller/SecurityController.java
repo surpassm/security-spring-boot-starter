@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
@@ -64,6 +65,11 @@ public class SecurityController {
 				//使用RedirectStrategy接口跳转到配置登陆的url页面，自定义登陆页面
 				redirectStrategy.sendRedirect(request, response, securityProperties.getLoginPage());
 			}
+		}
+		//清空当前缓存
+		HttpSession session = request.getSession();
+		if (null != session) {
+			session.invalidate();
 		}
 		return new Result(HttpStatus.FORBIDDEN.value(),"无访问权限");
 	}
