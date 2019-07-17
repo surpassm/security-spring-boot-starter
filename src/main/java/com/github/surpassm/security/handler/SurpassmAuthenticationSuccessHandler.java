@@ -180,4 +180,9 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 		redisTokenStore.storeAccessToken(oAuth2AccessToken, authentication);
 		return oAuth2AccessToken;
 	}
+
+	public void deleteOAuth2AccessToken(String tokenValue){
+		OAuth2AccessToken oAuth2AccessToken = new DefaultOAuth2AccessToken(tokenValue);
+		redisTokenStore.removeAccessToken(oAuth2AccessToken);
+	}
 }
