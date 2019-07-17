@@ -31,7 +31,6 @@ import java.io.IOException;
  */
 @Slf4j
 @RestController
-@ResponseStatus(code = HttpStatus.UNAUTHORIZED)
 public class SecurityController {
 
 	/**
@@ -54,7 +53,7 @@ public class SecurityController {
 	 * @throws IOException IOException
 	 */
 	@RequestMapping(SecurityConstants.DEFAULT_UNAUTHENTICATED_URL)
-	@ResponseStatus(code = HttpStatus.FORBIDDEN)
+	@ResponseStatus(code = HttpStatus.OK)
 	public Result requireAuthentication(HttpServletRequest request, HttpServletResponse response)throws IOException {
 		//取出引发跳转的请求
 		SavedRequest savedRequest = requestCache.getRequest(request, response);
