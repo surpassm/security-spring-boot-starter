@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -65,6 +66,12 @@ public class SecurityController {
 				//使用RedirectStrategy接口跳转到配置登陆的url页面，自定义登陆页面
 				redirectStrategy.sendRedirect(request, response, securityProperties.getLoginPage());
 			}
+		}
+		Cookie[] cookies = request.getCookies();
+		for (Cookie cookie : cookies) {
+			cookie.setMaxAge(0);
+			cookie.setPath("/");
+			response.addCookie(cookie);
 		}
 		//清空当前缓存
 		HttpSession session = request.getSession();
