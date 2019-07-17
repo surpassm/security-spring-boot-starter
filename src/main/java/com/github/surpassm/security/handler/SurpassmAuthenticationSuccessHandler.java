@@ -12,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
+import org.springframework.security.oauth2.common.DefaultOAuth2RefreshToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2RefreshToken;
 import org.springframework.security.oauth2.common.exceptions.UnapprovedClientAuthenticationException;
 import org.springframework.security.oauth2.provider.*;
 import org.springframework.security.oauth2.provider.token.*;
@@ -181,8 +183,8 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 		return oAuth2AccessToken;
 	}
 
-	public void deleteOAuth2AccessToken(String tokenValue){
-		OAuth2AccessToken oAuth2AccessToken = new DefaultOAuth2AccessToken(tokenValue);
-		redisTokenStore.removeAccessToken(oAuth2AccessToken);
+	public void deleteOAuth2AccessToken(String refreshToken){
+		OAuth2RefreshToken oAuth2RefreshToken = new DefaultOAuth2RefreshToken(refreshToken);
+		redisTokenStore.removeAccessTokenUsingRefreshToken(oAuth2RefreshToken);
 	}
 }
