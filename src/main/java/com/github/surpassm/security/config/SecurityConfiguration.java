@@ -4,6 +4,7 @@ import com.github.surpassm.security.authorize.AuthorizeCofigManager;
 import com.github.surpassm.security.filter.SurpassmAuthenticationManager;
 import com.github.surpassm.security.handler.SurpassmAuthenctiationFailureHandler;
 import com.github.surpassm.security.handler.SurpassmAuthenticationSuccessHandler;
+import com.github.surpassm.security.mobile.MobileCodeAuthenticationSecurityConfig;
 import com.github.surpassm.security.properties.SecurityProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,6 +45,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private SessionInformationExpiredStrategy sessionInformationExpiredStrategy;
     @Resource
     private LogoutSuccessHandler logoutSuccessHandler;
+	@Resource
+	private MobileCodeAuthenticationSecurityConfig mobileCodeAuthenticationSecurityConfig;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -86,6 +89,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .disable();
+		//增加手机直接登陆
+		http.apply(mobileCodeAuthenticationSecurityConfig);
         //允许自定义头部信息
         http.headers().frameOptions().sameOrigin();
         //不需要验证的URL地址
