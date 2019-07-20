@@ -2,6 +2,7 @@ package com.github.surpassm.security.config;
 
 import com.github.surpassm.security.properties.SecurityProperties;
 import com.github.surpassm.security.properties.app.Oauth2ClientProperties;
+import com.github.surpassm.security.token.MyDefaultTokenServices;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -15,6 +16,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -61,6 +63,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpointsConfigurer) throws Exception {
         endpointsConfigurer
+				.tokenServices(myDefaultTokenServices())
                 //改变存储方式
                 .tokenStore(redisTokenStore)
                 .authenticationManager(authenticationManager)
@@ -101,4 +104,13 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             }
         }
     }
+
+	@Bean
+	public AuthorizationServerTokenServices myDefaultTokenServices(){
+		MyDefaultTokenServices myDefaultTokenServices = new MyDefaultTokenServices();
+		myDefaultTokenServices.setTokenStore(redisTokenStore);
+		myDefaultTokenServices.setSupportRefreshToken(true);
+		myDefaultTokenServices.setReuseRefreshToken(true);
+		return myDefaultTokenServices;
+	}
 }

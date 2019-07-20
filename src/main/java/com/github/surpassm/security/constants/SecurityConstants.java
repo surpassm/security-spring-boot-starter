@@ -43,7 +43,7 @@ public interface SecurityConstants {
 	/**
 	 * session失效跳转
 	 */
-    String DEFAULT_SESSION_INVALID_URL = "/authentication/mobile";
+    String DEFAULT_SESSION_INVALID_URL = "/authentication/require";
 	/**
 	 * 默认的手机登录请求处理url
 	 */

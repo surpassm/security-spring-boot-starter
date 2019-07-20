@@ -52,7 +52,7 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 	@Resource
 	private TokenStore redisTokenStore;
 	@Resource
-	private AuthorizationServerTokenServices authorizationServerTokenServices;
+	private AuthorizationServerTokenServices myDefaultTokenServices;
 	@Resource
 	private SecurityProperties securityProperties;
 
@@ -95,7 +95,7 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 		//通过OAuth2Request 创建
 		OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request,authentication);
 		//交由authorizationServerTokenServices 创建token得到令牌
-		OAuth2AccessToken oAuth2AccessToken = authorizationServerTokenServices.createAccessToken(oAuth2Authentication);
+		OAuth2AccessToken oAuth2AccessToken = myDefaultTokenServices.createAccessToken(oAuth2Authentication);
 		//获取登陆成功的当前用户信息
 		Object principal = authentication.getPrincipal();
 		Map<String, Object> additionalInformation = new HashMap<>(16);
@@ -173,7 +173,7 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 		//创建一个TokenRequest,空MAP、clientId、Scope具备权限、custom自定义grantType标识
 		TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_SORTED_MAP,clientId,clientDetails.getScope(),"custom");
 
-		OAuth2AccessToken oAuth2AccessToken = authorizationServerTokenServices.refreshAccessToken(refreshToken, tokenRequest);
+		OAuth2AccessToken oAuth2AccessToken = myDefaultTokenServices.refreshAccessToken(refreshToken, tokenRequest);
 		OAuth2Authentication authentication = redisTokenStore.readAuthenticationForRefreshToken(oAuth2AccessToken.getRefreshToken());
 		Object principal = authentication.getUserAuthentication().getPrincipal();
 		Map<String, Object> additionalInformation = new HashMap<>(16);
