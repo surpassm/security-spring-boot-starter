@@ -19,7 +19,7 @@ public class Oauth2ClientProperties {
 
     private String clientIdSecret;
 	/**
-	 * TOKEN 过期时间默认12小时
+	 * TOKEN 过期时间默认24小时
 	 */
     private int accessTokenValiditySeconds = 86400;
 

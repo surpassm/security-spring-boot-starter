@@ -90,8 +90,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 builder.withClient(config.getClientId())
                         //herd账号，应用名称
                         .secret(config.getClientIdSecret())
-                        //过期时间，默认为12小时
+                        //accessToken过期时间，默认24小时
                         .accessTokenValiditySeconds(config.getAccessTokenValiditySeconds())
+						//accessToken过期时间，默认为30天
 						.refreshTokenValiditySeconds(config.getRefreshTokenValiditySeconds())
                         //指定当前客户端支持的授权模式 token、密码
                         .authorizedGrantTypes("refresh_token","password")
