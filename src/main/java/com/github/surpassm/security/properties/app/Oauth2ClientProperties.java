@@ -18,6 +18,13 @@ public class Oauth2ClientProperties {
     private String clientId;
 
     private String clientIdSecret;
+	/**
+	 * TOKEN 过期时间默认12小时
+	 */
+    private int accessTokenValiditySeconds = 86400;
 
-    private int accessTokenValiditySeconds = 7200;
+	/**
+	 * 刷新TOKEN过期时间默认30天
+	 */
+	private int refreshTokenValiditySeconds = 2592000;
 }
