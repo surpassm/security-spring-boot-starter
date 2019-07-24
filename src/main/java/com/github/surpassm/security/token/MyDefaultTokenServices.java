@@ -35,7 +35,7 @@ public class MyDefaultTokenServices extends DefaultTokenServices{
 	}
 
 	@Override
-	@Transactional
+	@Transactional(rollbackFor = {RuntimeException.class, Exception.class})
 	public OAuth2AccessToken createAccessToken(OAuth2Authentication authentication) throws AuthenticationException {
 
 		OAuth2AccessToken existingAccessToken = tokenStore.getAccessToken(authentication);

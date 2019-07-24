@@ -78,7 +78,8 @@ public class MobileFilter extends OncePerRequestFilter implements InitializingBe
 	 */
 	private String getValidateCodeType(HttpServletRequest request) {
 		String result = null;
-		if (!StringUtils.equalsIgnoreCase(request.getMethod(), "get")) {
+		String get = "get";
+		if (!StringUtils.equalsIgnoreCase(request.getMethod(), get)) {
 			Set<String> urls = urlMap.keySet();
 			for (String url : urls) {
 				if (pathMatcher.match(url, request.getRequestURI())) {

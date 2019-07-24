@@ -10,6 +10,10 @@ import org.springframework.security.config.annotation.web.configurers.Expression
  * description 认证管理器
  */
 public interface AuthorizeCofigManager {
+	/**
+	 * 认证管理器
+	 * @param config s
+	 */
     void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config);
 
 }

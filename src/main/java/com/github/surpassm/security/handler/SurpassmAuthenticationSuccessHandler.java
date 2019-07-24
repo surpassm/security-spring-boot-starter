@@ -34,7 +34,7 @@ import java.util.Map;
  * 自定义登陆成功配置
  * 继承AuthenticationSuccessHandler
  * 默认成功处理器：SavedRequestAwareAuthenticationSuccessHandler
- * author mc
+ * @author mc
  * date 2018/08/27 7:11
  */
 @Component("surpassmAuthenticationSuccessHandler")
@@ -65,7 +65,8 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 
         logger.info("登录成功");
         String header = request.getHeader("Login");
-        if (header == null || !header.startsWith("Basic ")) {
+        String basic = "Basic ";
+        if (header == null || !header.startsWith(basic)) {
             throw new SurpassmAuthenticationException("请求头中无client信息");
         }
         String[] tokens = extractAndDecodeHeader(header, request);
@@ -183,7 +184,7 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 		return oAuth2AccessToken;
 	}
 
-	public void deleteOAuth2AccessToken(String refreshToken){
+	public void deleteOauth2AccessToken(String refreshToken){
 		OAuth2RefreshToken oAuth2RefreshToken = new DefaultOAuth2RefreshToken(refreshToken);
 		redisTokenStore.removeAccessTokenUsingRefreshToken(oAuth2RefreshToken);
 	}

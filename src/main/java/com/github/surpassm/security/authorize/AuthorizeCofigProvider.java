@@ -10,5 +10,9 @@ import org.springframework.security.config.annotation.web.configurers.Expression
  * description 认证配置提供提供者
  */
 public interface AuthorizeCofigProvider {
+	/**
+	 * 认证配置提供提供者
+	 * @param config xs
+	 */
     void config(ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config);
 }

@@ -13,7 +13,7 @@ import java.util.Collection;
  * Description
  */
 public class SurpassmAuthenctiationToken extends AbstractAuthenticationToken {
-	private static final long servialVsersion = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
+	private static final long SERVIAL_VSERSION = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 	/**
 	 * Creates a token with the supplied array of authorities.
 	 *

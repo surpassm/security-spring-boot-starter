@@ -34,7 +34,13 @@ public class JwtTokenUtils implements Serializable {
 	 */
     private static final long EXPIRATION_REMEMBER = 604800L;
 
-	//创建Token 只带用户名
+
+	/**
+	 * 创建Token 只带用户名
+	 * @param userId userId
+	 * @param isRememberMe 是否记住我
+	 * @return string
+	 */
     public static String createToken(String userId,boolean isRememberMe){
         long expiration = isRememberMe ? EXPIRATION_REMEMBER : EXPIRATION;
 		//创建Token令牌
@@ -51,7 +57,11 @@ public class JwtTokenUtils implements Serializable {
                 .compact();
     }
 
-    //获取用户id
+	/**
+	 * 获取用户id
+	 * @param token t
+	 * @return String
+	 */
 	public static String getUsernameFromToken(String token){
 		//解析Token的payload
 		Claims claims = Jwts.parser()
@@ -62,7 +72,11 @@ public class JwtTokenUtils implements Serializable {
 		return  claims.get(AUTHORITIES_KEY).toString();
 	}
 
-	//验证Token是否正确
+	/**
+	 * 验证Token是否正确
+	 * @param token token
+	 * @return boolean
+	 */
 	public static boolean validateToken(String token){
 		try {
 			//通过密钥验证Token
@@ -177,8 +191,6 @@ public class JwtTokenUtils implements Serializable {
 				//  用户名写入标题
 				.setSubject(claims.getSubject())
 				.setExpiration(new Date(expiration));
-		//claims.setExpiration(new Date(expiration));
-		// String refreshedToken = generateAccessToken(claims.getSubject(), claims,expiration);
 		return "";
 	}
 

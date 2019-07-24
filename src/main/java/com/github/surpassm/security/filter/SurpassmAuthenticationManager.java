@@ -20,13 +20,6 @@ import java.io.IOException;
  */
 public class SurpassmAuthenticationManager extends UsernamePasswordAuthenticationFilter {
 
-//    @Autowired
-//    private CustomerUserDetailsService userDetailsService;
-
-//    @Autowired
-//    private JwtTokenUtils jwtTokenUtil;
-
-	private String tokenHeader="Authorization";
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -48,8 +41,6 @@ public class SurpassmAuthenticationManager extends UsernamePasswordAuthenticatio
 //                }
 //            }
             chain.doFilter(request, response);
-//        }
-//
     }
 
 	/**

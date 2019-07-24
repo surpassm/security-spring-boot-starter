@@ -32,10 +32,10 @@ public class MobileCodeAuthenticationFilter extends AbstractAuthenticationProces
 	}
 
 
-
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-		if (postOnly && !request.getMethod().equals("POST")) {
+		String post = "POST";
+		if (postOnly && !post.equals(request.getMethod())) {
 			throw new AuthenticationServiceException("认证请求不支持: " + request.getMethod());
 		}
 		//获取手机号  在请求中，携带参数的名字

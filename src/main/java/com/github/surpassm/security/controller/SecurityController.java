@@ -61,7 +61,8 @@ public class SecurityController {
 			String targetUrl = savedRequest.getRedirectUrl();
 			log.info("引发跳转的请求是:" + targetUrl);
 			//判断这个url是否为.html结尾
-			if (StringUtils.endsWithIgnoreCase(targetUrl, ".html")) {
+			String html= ".html";
+			if (StringUtils.endsWithIgnoreCase(targetUrl, html)) {
 				//使用RedirectStrategy接口跳转到配置登陆的url页面，自定义登陆页面
 				redirectStrategy.sendRedirect(request, response, securityProperties.getLoginPage());
 			}
