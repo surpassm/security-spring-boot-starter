@@ -1,4 +1,4 @@
-package com.github.surpassm.security;
+package com.github.surpassm;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

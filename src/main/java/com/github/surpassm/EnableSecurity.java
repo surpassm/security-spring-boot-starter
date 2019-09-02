@@ -15,6 +15,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@ComponentScan("com.github.surpassm.security")
+@ComponentScan("com.github.surpassm")
 public @interface EnableSecurity {
 }
