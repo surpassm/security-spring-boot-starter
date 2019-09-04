@@ -68,10 +68,12 @@ public class SecurityController {
 			}
 		}
 		Cookie[] cookies = request.getCookies();
-		for (Cookie cookie : cookies) {
-			cookie.setMaxAge(0);
-			cookie.setPath("/");
-			response.addCookie(cookie);
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				cookie.setMaxAge(0);
+				cookie.setPath("/");
+				response.addCookie(cookie);
+			}
 		}
 		//清空当前缓存
 		HttpSession session = request.getSession();
