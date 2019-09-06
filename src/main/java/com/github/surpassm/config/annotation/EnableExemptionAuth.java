@@ -9,9 +9,9 @@ import java.lang.annotation.Target;
  * @author mc
  * Create date 2019/9/6 14:31
  * Version 1.0
- * Description 用于接收授权token
+ * Description 接口加入免验证队列中 surpassm:security:o-auth2:no-verify[0]
  */
-@Target(ElementType.PARAMETER)
+@Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AuthorizationToken {
+public @interface EnableExemptionAuth {
 }
