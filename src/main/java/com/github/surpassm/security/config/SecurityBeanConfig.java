@@ -6,8 +6,6 @@ import com.github.surpassm.security.logout.LiaoinLogoutSuccessHandler;
 import com.github.surpassm.security.properties.SecurityProperties;
 import com.github.surpassm.security.session.LiaoinExpiredSessionStrategy;
 import com.github.surpassm.security.session.LiaoinInvalidSessionStrategy;
-import com.github.surpassm.security.util.JwtTokenUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

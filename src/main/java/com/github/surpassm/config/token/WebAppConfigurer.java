@@ -2,6 +2,7 @@ package com.github.surpassm.config.token;
 
 import com.github.surpassm.config.annotation.EnableExemptionAuth;
 import com.github.surpassm.security.properties.SecurityProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.method.HandlerMethod;
@@ -27,7 +28,6 @@ import java.util.Map;
  * Description
  */
 @Configuration
-@Order(Integer.MAX_VALUE)
 public class WebAppConfigurer implements WebMvcConfigurer {
     @Resource
     private TokenMethodArgumentResolver tokenMethodArgumentResolver;
@@ -35,9 +35,8 @@ public class WebAppConfigurer implements WebMvcConfigurer {
 	private TokenInterceptor tokenInterceptor;
     @Resource
 	private SecurityProperties securityProperties;
-	@Resource
-	private RequestMappingHandlerMapping mapping;
-
+//	@Autowired
+//	private RequestMappingHandlerMapping mapping;
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(tokenMethodArgumentResolver);

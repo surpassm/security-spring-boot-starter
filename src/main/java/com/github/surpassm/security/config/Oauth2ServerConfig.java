@@ -5,10 +5,8 @@ import com.github.surpassm.security.properties.app.Oauth2ClientProperties;
 import com.github.surpassm.security.token.MyDefaultTokenServices;
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.builders.InMemoryClientDetailsServiceBuilder;
@@ -21,7 +19,6 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
