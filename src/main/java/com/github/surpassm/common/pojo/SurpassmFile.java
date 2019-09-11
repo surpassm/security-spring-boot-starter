@@ -17,9 +17,13 @@ import lombok.*;
 public class SurpassmFile {
 
 	/**
-	 * 文件名称
+	 * 文件原名称
 	 */
-	private String fileName;
+	private String fileOldName;
+	/**
+	 * 文件原名称
+	 */
+	private String fileNewName;
 	/**
 	 * 文件后缀
 	 */

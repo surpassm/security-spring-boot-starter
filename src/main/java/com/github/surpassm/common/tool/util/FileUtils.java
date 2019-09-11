@@ -34,7 +34,8 @@ public class FileUtils {
             //保存文件
             file.transferTo(dest);
 			SurpassmFile file1 = new SurpassmFile();
-			file1.setFileName(getFileName(file));
+			file1.setFileOldName(getFileName(file));
+			file1.setFileNewName(fileName);
 			file1.setFileSuffix("." + getFileType(file));
 			file1.setUrl(filePath + fileName);
             return file1;
