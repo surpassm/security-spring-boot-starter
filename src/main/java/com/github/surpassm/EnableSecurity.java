@@ -2,6 +2,7 @@ package com.github.surpassm;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.ImportResource;
 
 import java.lang.annotation.*;
 
@@ -15,6 +16,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@ComponentScan("com.github.surpassm")
+//@ComponentScan(basePackages = "com.github.surpassm")
 public @interface EnableSecurity {
 }
