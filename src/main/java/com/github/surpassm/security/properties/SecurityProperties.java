@@ -22,6 +22,10 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @AllArgsConstructor
 @ConfigurationProperties(prefix = "surpassm.security")
 public class SecurityProperties {
+	/**
+	 * 是否开启安全框架服务
+	 */
+	Boolean enabled = false;
 
     /**
      * 登陆返回方式

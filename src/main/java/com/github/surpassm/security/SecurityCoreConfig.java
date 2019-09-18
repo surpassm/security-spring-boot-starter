@@ -1,7 +1,10 @@
 package com.github.surpassm.security;
 
 import com.github.surpassm.security.properties.SecurityProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -11,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
  * description 使SecurityProperties 读取器生效
  */
 @Configuration
+@ComponentScan({"com.github.surpassm"})
 @EnableConfigurationProperties(SecurityProperties.class)
+@ConditionalOnProperty(prefix = "surpassm.security", name = "enabled", havingValue = "true")
 public class SecurityCoreConfig {
 }

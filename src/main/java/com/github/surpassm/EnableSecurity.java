@@ -1,5 +1,7 @@
 package com.github.surpassm;
 
+import com.github.surpassm.security.SecurityCoreConfig;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
@@ -16,6 +18,7 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-//@ComponentScan(basePackages = "com.github.surpassm")
+@Import({SecurityCoreConfig.class})
 public @interface EnableSecurity {
+
 }
