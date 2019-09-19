@@ -1,16 +1,10 @@
 package com.github.surpassm.config.exem;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.surpassm.common.tool.util.JsonUtils;
-import com.github.surpassm.config.annotation.EnableExemptionAuth;
+import com.github.surpassm.config.annotation.ExemptionAuth;
 import com.github.surpassm.security.properties.SecurityProperties;
-import org.springframework.aop.aspectj.AspectJAopUtils;
-import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.stereotype.Component;
 import org.springframework.util.ReflectionUtils;
-import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition;
 
 import javax.annotation.Resource;
 import java.lang.annotation.Annotation;
@@ -33,11 +27,11 @@ public class EnableExemptionAuthConfig implements BeanPostProcessor  {
 		//获取元组信息
 		Method[] methods = ReflectionUtils.getAllDeclaredMethods(bean.getClass());
 		for (Method method : methods) {
-			if (method.isAnnotationPresent(EnableExemptionAuth.class)){
+			if (method.isAnnotationPresent(ExemptionAuth.class)){
 				Annotation[] annotations = method.getAnnotations();
 				boolean tag = false;
 				for (Annotation annotation : annotations) {
-					if (annotation.annotationType().isAnnotationPresent(EnableExemptionAuth.class)) {
+					if (annotation.annotationType().isAnnotationPresent(ExemptionAuth.class)) {
 						tag = true;
 					}
 				}
