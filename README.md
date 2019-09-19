@@ -3,7 +3,9 @@
 ~~~
 surpassm:
   security:
+    enabled: true ##必要条件
     o-auth2:
+      store-type: redis  ##缓存方式 可以使用JWT
       clients[0]:
         clientId: user_1
         clientIdSecret: 123456
@@ -37,18 +39,30 @@ surpassm:
     no-verify[14]: /upload/**
 #    用户名密码登录请求处理url
     default-login-processing-url-from: /authentication/form
-#    default-property-inclusion: NON_NULL
+    #默认的登陆属性名称
+#    username-parameter: username
+    #登陆的密码属性名称
+#    password-parameter: password
 ~~~
-2、在Application启动类中添加扫描注解 @ComponentScan({"com.github.surpassm"})
+2、使用方法
 ~~~
+//1、在Application启动类中添加自定义注解 @EnableSecurity
+
+@EnableSecurity
 @SpringBootApplication
-@ComponentScan({"com.liaoin.demo","com.github.surpassm"})
 public class DemoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 }
+
+//2、在yml文件配置
+surpassm:
+  security:
+    enabled: true
+
 ~~~
+注：这2个条件必不可少
 3、在自己的项目实现 UserDetailsService 接口处理自己的登陆逻辑
 ~~~
 @Slf4j
