@@ -39,6 +39,10 @@ public class SecurityProperties {
 	 * 登陆接口header对应key
 	 */
 	private String headerLogin = "Login";
+	/**
+	 * 登陆接口header对应key
+	 */
+	private String headerLoginValue = "Basic ";
 
     /**
      * 登陆返回方式

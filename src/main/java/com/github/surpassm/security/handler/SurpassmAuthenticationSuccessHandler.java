@@ -65,7 +65,7 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 
         logger.info("登录成功");
         String header = request.getHeader(securityProperties.getHeaderLogin());
-        String basic = securityProperties.getHeaderValue();
+        String basic = securityProperties.getHeaderLoginValue();
         if (header == null || !header.startsWith(basic)) {
             throw new SurpassmAuthenticationException("请求头中无client信息");
         }
