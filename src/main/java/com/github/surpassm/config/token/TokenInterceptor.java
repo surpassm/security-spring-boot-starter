@@ -2,6 +2,7 @@ package com.github.surpassm.config.token;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.surpassm.common.jackson.Result;
+import com.github.surpassm.security.properties.SecurityProperties;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -22,12 +23,14 @@ import java.io.PrintWriter;
 public class TokenInterceptor extends HandlerInterceptorAdapter {
 	@Resource
 	private ObjectMapper objectMapper;
+	@Resource
+	private SecurityProperties securityProperties;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		String header = request.getHeader("Authorization");
-		if (header != null && header.startsWith("Bearer ")) {
+		String header = request.getHeader(securityProperties.getHeaderKey());
+		if (header != null && header.startsWith(securityProperties.getHeaderValue())) {
 			String token = header.substring(7);
-			request.setAttribute("Authorization", token);
+			request.setAttribute(securityProperties.getHeaderKey(), token);
 			return true;
 		}
 		response(response);

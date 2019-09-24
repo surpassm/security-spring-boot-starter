@@ -24,8 +24,6 @@ public class WebAppConfigurer implements WebMvcConfigurer {
 	private TokenInterceptor tokenInterceptor;
     @Resource
 	private SecurityProperties securityProperties;
-//	@Autowired
-//	private RequestMappingHandlerMapping mapping;
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(tokenMethodArgumentResolver);
@@ -33,7 +31,6 @@ public class WebAppConfigurer implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-//		getEnableExemptionAuth(securityProperties);
 		InterceptorRegistration interceptorRegistration = registry.addInterceptor(tokenInterceptor);
 		String[] noVerify = securityProperties.getNoVerify();
 		if (noVerify != null && noVerify.length != 0){
@@ -54,7 +51,7 @@ public class WebAppConfigurer implements WebMvcConfigurer {
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
 		registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST", "OPTIONS", "PUT")
-				.allowedHeaders("Login","Authorization", "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method","Access-Control-Request-Headers")
+				.allowedHeaders(securityProperties.getHeaderLogin(),securityProperties.getHeaderKey(), "Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method","Access-Control-Request-Headers")
 				.exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
 				.allowCredentials(true).maxAge(36000);
 	}

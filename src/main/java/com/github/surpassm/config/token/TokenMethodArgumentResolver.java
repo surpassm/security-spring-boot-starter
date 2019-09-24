@@ -1,6 +1,7 @@
 package com.github.surpassm.config.token;
 
 import com.github.surpassm.config.annotation.AuthorizationToken;
+import com.github.surpassm.security.properties.SecurityProperties;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -10,6 +11,8 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.multipart.support.MissingServletRequestPartException;
 
+import javax.annotation.Resource;
+
 /**
  * @author mc
  * Create date 2019/3/4 15:53
@@ -18,6 +21,9 @@ import org.springframework.web.multipart.support.MissingServletRequestPartExcept
  */
 @Component
 public class TokenMethodArgumentResolver implements HandlerMethodArgumentResolver {
+
+	@Resource
+	private SecurityProperties securityProperties;
 
     @Override
     public boolean supportsParameter(MethodParameter methodParameter) {
@@ -29,10 +35,10 @@ public class TokenMethodArgumentResolver implements HandlerMethodArgumentResolve
 
     @Override
     public Object resolveArgument(MethodParameter methodParameter, ModelAndViewContainer modelAndViewContainer, NativeWebRequest nativeWebRequest, WebDataBinderFactory webDataBinderFactory) throws Exception {
-		String token = (String) nativeWebRequest.getAttribute("Authorization", RequestAttributes.SCOPE_REQUEST);
+		String token = (String) nativeWebRequest.getAttribute(securityProperties.getHeaderKey(), RequestAttributes.SCOPE_REQUEST);
         if (token != null) {
             return token;
         }
-        throw new MissingServletRequestPartException("Authorization");
+        throw new MissingServletRequestPartException(securityProperties.getHeaderKey());
     }
 }

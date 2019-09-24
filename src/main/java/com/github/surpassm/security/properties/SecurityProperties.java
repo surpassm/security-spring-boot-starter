@@ -26,6 +26,19 @@ public class SecurityProperties {
 	 * 是否开启安全框架服务
 	 */
 	Boolean enabled = false;
+	/**
+	 * header key值
+	 */
+	private String headerKey = "Authorization";
+
+	/**
+	 * header key值
+	 */
+	private String headerValue = "Bearer ";
+	/**
+	 * 登陆接口header对应key
+	 */
+	private String headerLogin = "Login";
 
     /**
      * 登陆返回方式
