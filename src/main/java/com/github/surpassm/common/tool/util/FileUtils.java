@@ -22,7 +22,7 @@ public class FileUtils {
     static String FILE_UPLOAD_PATH = "/upload/";
 
     public static SurpassmFile upload(MultipartFile file, HttpServletRequest request, String path) throws Exception {
-        String fileName = System.currentTimeMillis() + "." + getFileType(file);
+        String fileName = SystemClock.millisClock().now() + "." + getFileType(file);
         int size = (int) file.getSize();
         String filePath = "/" + path + "/" + nowDate() + "/";
         File dest = new File(rootPath() + filePath + "/" + fileName);
