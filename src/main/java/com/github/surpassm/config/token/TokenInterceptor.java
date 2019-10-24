@@ -54,7 +54,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 		response.setHeader("Cache-Control", "no-store");
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		try (PrintWriter out = response.getWriter()) {
-			log.error("请求地址:"+request.getRequestURI()+",请携带token");
+			log.error("请求地址:"+request.getRequestURI()+ResultCode.PERMISSION_NO_ACCESS.getMsg()+",请携带token");
 			out.write(objectMapper.writeValueAsString(new Result(ResultCode.PERMISSION_NO_ACCESS.getCode(), ResultCode.PERMISSION_NO_ACCESS.getMsg(), "")));
 			out.flush();
 		} catch (IOException e) {
