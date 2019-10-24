@@ -103,9 +103,9 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 		additionalInformation.put("userInfo",principal);
 		((DefaultOAuth2AccessToken)oAuth2AccessToken).setAdditionalInformation(additionalInformation);
 		//设置过期时间
-		((DefaultOAuth2AccessToken) oAuth2AccessToken).setExpiration(DateUtil.addOneHour(securityProperties.getExpirationToken()));
+//		((DefaultOAuth2AccessToken) oAuth2AccessToken).setExpiration(DateUtil.addOneHour(securityProperties.getExpirationToken()));
 		//存入redis缓存中
-		redisTokenStore.storeAccessToken(oAuth2AccessToken,oAuth2Authentication);
+//		redisTokenStore.storeAccessToken(oAuth2AccessToken,oAuth2Authentication);
 		//返回前端JSON
 		response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(oAuth2AccessToken));

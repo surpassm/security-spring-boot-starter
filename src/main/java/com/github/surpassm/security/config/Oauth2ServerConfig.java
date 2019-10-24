@@ -60,7 +60,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpointsConfigurer) throws Exception {
         endpointsConfigurer
-				.tokenServices(myDefaultTokenServices())
+//				.tokenServices(myDefaultTokenServices())
                 //改变存储方式
                 .tokenStore(redisTokenStore)
                 .authenticationManager(authenticationManager)
@@ -102,12 +102,12 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         }
     }
 
-	@Bean
-	public AuthorizationServerTokenServices myDefaultTokenServices(){
-		MyDefaultTokenServices myDefaultTokenServices = new MyDefaultTokenServices();
-		myDefaultTokenServices.setTokenStore(redisTokenStore);
-		myDefaultTokenServices.setSupportRefreshToken(true);
-		myDefaultTokenServices.setReuseRefreshToken(true);
-		return myDefaultTokenServices;
-	}
+//	@Bean
+//	public AuthorizationServerTokenServices myDefaultTokenServices(){
+//		MyDefaultTokenServices myDefaultTokenServices = new MyDefaultTokenServices();
+//		myDefaultTokenServices.setTokenStore(redisTokenStore);
+//		myDefaultTokenServices.setSupportRefreshToken(true);
+//		myDefaultTokenServices.setReuseRefreshToken(true);
+//		return myDefaultTokenServices;
+//	}
 }

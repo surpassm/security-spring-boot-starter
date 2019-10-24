@@ -125,6 +125,6 @@ public class SecurityProperties {
 	/**
 	 * redis Token过期时间是小时，默认是1个小时
 	 */
-	private int expirationToken = 1;
+//	private int expirationToken = 1;
 
 }
