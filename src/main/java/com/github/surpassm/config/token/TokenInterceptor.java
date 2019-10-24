@@ -29,14 +29,16 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 	private SecurityProperties securityProperties;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		log.info("请求地址:"+request.getRequestURI());
 		String header = request.getHeader(securityProperties.getHeaderKey());
+		if ("/".equals(header)){
+			return false;
+		}
 		if (header != null && header.startsWith(securityProperties.getHeaderValue())) {
 			String token = header.substring(7);
 			request.setAttribute(securityProperties.getHeaderKey(), token);
 			return true;
 		}
-		response(response);
+		response(request,response);
 		return false;
 	}
 
@@ -44,14 +46,14 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 	/**
 	 * 返回错误信息
 	 */
-	private void response(HttpServletResponse response) {
+	private void response(HttpServletRequest request,HttpServletResponse response) {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType(MediaType.APPLICATION_JSON_VALUE);
 		response.setHeader("Pragma", "no-cache");
 		response.setHeader("Cache-Control", "no-store");
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		try (PrintWriter out = response.getWriter()) {
-			log.error("请携带token");
+			log.error("请求地址:"+request.getRequestURI()+",请携带token");
 			out.write(objectMapper.writeValueAsString(new Result(401, "你无权操作", "")));
 			out.flush();
 		} catch (IOException e) {
