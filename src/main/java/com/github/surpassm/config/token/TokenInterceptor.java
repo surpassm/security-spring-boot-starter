@@ -2,6 +2,7 @@ package com.github.surpassm.config.token;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.surpassm.common.jackson.Result;
+import com.github.surpassm.common.jackson.ResultCode;
 import com.github.surpassm.security.properties.SecurityProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -54,7 +55,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		try (PrintWriter out = response.getWriter()) {
 			log.error("请求地址:"+request.getRequestURI()+",请携带token");
-			out.write(objectMapper.writeValueAsString(new Result(401, "你无权操作", "")));
+			out.write(objectMapper.writeValueAsString(new Result(ResultCode.PERMISSION_NO_ACCESS.getCode(), ResultCode.PERMISSION_NO_ACCESS.getMsg(), "")));
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
