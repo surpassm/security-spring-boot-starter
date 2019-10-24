@@ -3,6 +3,7 @@ package com.github.surpassm.config.token;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.surpassm.common.jackson.Result;
 import com.github.surpassm.security.properties.SecurityProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -19,6 +20,7 @@ import java.io.PrintWriter;
  * Version 1.0
  * Description token拦截器
  */
+@Slf4j
 @Component
 public class TokenInterceptor extends HandlerInterceptorAdapter {
 	@Resource
@@ -27,6 +29,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 	private SecurityProperties securityProperties;
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		log.info("请求地址:"+request.getRequestURI());
 		String header = request.getHeader(securityProperties.getHeaderKey());
 		if (header != null && header.startsWith(securityProperties.getHeaderValue())) {
 			String token = header.substring(7);
@@ -48,6 +51,7 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 		response.setHeader("Cache-Control", "no-store");
 		response.setHeader("Access-Control-Allow-Origin", "*");
 		try (PrintWriter out = response.getWriter()) {
+			log.error("请携带token");
 			out.write(objectMapper.writeValueAsString(new Result(401, "你无权操作", "")));
 			out.flush();
 		} catch (IOException e) {
