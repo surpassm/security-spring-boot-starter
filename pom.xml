@@ -159,7 +159,7 @@
                 <version>1.6.7</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <serverId>ossrh</serverId>
+                    <serverId>oss</serverId>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
@@ -254,13 +254,13 @@
     <distributionManagement>
         <snapshotRepository>
             <!-- 这个id需要在setting.xml中设置  -->
-            <id>ossrh</id>
+            <id>oss</id>
             <name>OSS Snapshots Repository</name>
             <!-- 这里的url就是Issue中回复的snapshots 的repo地址-->
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>ossrh</id>
+            <id>oss</id>
             <name>OSS Staging Repository</name>
             <!-- 这里的url就是Issue中回复的staging 的repo地址-->
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
