@@ -154,27 +154,15 @@
             </plugin>
             <!-- 华丽的分割线 -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.2</version>
-                <executions>
-                    <execution>
-                        <id>enforce-maven</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireMavenVersion>
-                                    <version>(,2.1.0),(2.1.0,2.2.0),(2.2.0,)</version>
-                                    <message>Maven 2.1.0 and 2.2.0 produce incorrect GPG signatures and checksums
-                                        respectively.
-                                    </message>
-                                </requireMavenVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>oss</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
             </plugin>
         </plugins>
 
@@ -195,22 +183,28 @@
     </build>
 
     <!-- 华丽的分割线 -->
-    <repositories>
-        <repository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snapshots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
+    <developers>
+        <developer>
+            <name>surpassm</name>
+            <email>lustres@sina.com</email>
+            <url>https://github.com/surpassm</url>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/surpassm/security-spring-boot-starter</url>
+        <connection>scm:git:git@gitee.com:surpassm/security-spring-boot-starter.git</connection>
+        <developerConnection>scm:git:git@gitee.com:surpassm/security-spring-boot-starter.git</developerConnection>
+    </scm>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
     <profiles>
         <profile>
-            <id>sonatype-oss-release</id>
+            <id>release</id>
             <build>
                 <plugins>
                     <plugin>
@@ -257,41 +251,20 @@
             </build>
         </profile>
     </profiles>
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <scm>
-        <url>https://github.com/surpassm/security-spring-boot-starter</url>
-        <connection>scm:git:git@gitee.com:surpassm/security-spring-boot-starter.git</connection>
-        <developerConnection>scm:git:git@gitee.com:surpassm/security-spring-boot-starter.git</developerConnection>
-    </scm>
-    <developers>
-        <developer>
-            <name>surpassm</name>
-            <email>lustres@sina.com</email>
-            <url>https://github.com/surpassm</url>
-        </developer>
-    </developers>
     <distributionManagement>
         <snapshotRepository>
             <!-- 这个id需要在setting.xml中设置  -->
-            <id>sonatype-nexus-snapshots</id>
+            <id>ossrh</id>
             <name>OSS Snapshots Repository</name>
             <!-- 这里的url就是Issue中回复的snapshots 的repo地址-->
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>sonatype-nexus-staging</id>
+            <id>ossrh</id>
             <name>OSS Staging Repository</name>
             <!-- 这里的url就是Issue中回复的staging 的repo地址-->
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
     </distributionManagement>
-
 
 </project>
