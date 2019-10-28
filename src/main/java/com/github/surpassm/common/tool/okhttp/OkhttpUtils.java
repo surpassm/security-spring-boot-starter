@@ -36,13 +36,6 @@ public class OkhttpUtils {
         return ssfFactory;
     }
 
-    /**
-     * get请求
-     *
-     * @param url url
-     * @return Response
-     * @throws IOException
-     */
     public static Response get(String url) throws IOException {
         Request request = new Request.Builder()
                 .url(url)
