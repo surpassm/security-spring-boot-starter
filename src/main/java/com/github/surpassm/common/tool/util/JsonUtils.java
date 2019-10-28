@@ -19,6 +19,7 @@ public class JsonUtils {
      * 将对象转换成json字符串
      * Title: pojoToJson
      * @param data a
+     * @param mapper mapper
      * @return a
      */
     public static String objectToJson(Object data, ObjectMapper mapper) {

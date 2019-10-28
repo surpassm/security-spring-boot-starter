@@ -16,11 +16,11 @@ import java.util.Map;
  */
 public class OkhttpUtils {
 
-    private  static OkHttpClient client;
+    private static OkHttpClient client;
 
     static {
         client = new OkHttpClient.Builder()
-                .sslSocketFactory(createSSLSocketFactory(),new TrustAllCerts())
+                .sslSocketFactory(createSSLSocketFactory(), new TrustAllCerts())
                 .hostnameVerifier((hostname, session) -> true)
                 .build();
     }
@@ -36,84 +36,86 @@ public class OkhttpUtils {
         return ssfFactory;
     }
 
-   /**get请求*/
-   public static Response get(String url) throws IOException {
-       Request request=new Request.Builder()
-               .url(url)
-               .build();
-       return client.newCall(request).execute();
+    /**
+     * get请求
+     *
+     * @param url url
+     * @return Response
+     * @throws IOException
+     */
+    public static Response get(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+        return client.newCall(request).execute();
 
-   }
-	/**delete请求*/
-	public static Response delete(String url) throws IOException {
-		Request request=new Request.Builder()
-				.url(url)
-				.delete()
-				.build();
-		return client.newCall(request).execute();
+    }
 
-	}
+    public static Response delete(String url) throws IOException {
+        Request request = new Request.Builder()
+                .url(url)
+                .delete()
+                .build();
+        return client.newCall(request).execute();
 
-   /**post*/
-   public static Response post(String url, Map<String,String> params) throws IOException {
-       FormBody.Builder b=new FormBody.Builder();
-       params.forEach(
-       		(k,v)->{
-       			if (v!=null){
-       				b.add(k,v);
-       			}
-       		});
-       RequestBody body =b.build();
-       Request request = new Request.Builder()
-               .url(url)
-               .post(body)
-               .build();
-       return client.newCall(request).execute();
-   }
+    }
 
-	public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-	public static Response postJson(String url, String json) throws IOException {
-		RequestBody body =RequestBody.create(JSON,json);
-		Request request = new Request.Builder()
-				.header("Content-Type","application/json;charset=UTF-8")
-				.url(url)
-				.post(body)
-				.build();
-		return client.newCall(request).execute();
-	}
+    public static Response post(String url, Map<String, String> params) throws IOException {
+        FormBody.Builder b = new FormBody.Builder();
+        params.forEach(
+                (k, v) -> {
+                    if (v != null) {
+                        b.add(k, v);
+                    }
+                });
+        RequestBody body = b.build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        return client.newCall(request).execute();
+    }
 
-	/**patch*/
-	public static Response patch(String url, Map<String,String> params) throws IOException {
-		FormBody.Builder b=new FormBody.Builder();
-		params.forEach((k,v)->b.add(k,v));
-		RequestBody body =b.build();
-		Request request = new Request.Builder()
-				.url(url)
-				.patch(body)
-				.build();
-		return client.newCall(request).execute();
-	}
+    private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+
+    public static Response postJson(String url, String json) throws IOException {
+        RequestBody body = RequestBody.create(JSON, json);
+        Request request = new Request.Builder()
+                .header("Content-Type", "application/json;charset=UTF-8")
+                .url(url)
+                .post(body)
+                .build();
+        return client.newCall(request).execute();
+    }
+
+    public static Response patch(String url, Map<String, String> params) throws IOException {
+        FormBody.Builder b = new FormBody.Builder();
+        params.forEach((k, v) -> b.add(k, v));
+        RequestBody body = b.build();
+        Request request = new Request.Builder()
+                .url(url)
+                .patch(body)
+                .build();
+        return client.newCall(request).execute();
+    }
 
 
-	public static Response postList(String url, List<Map<String,String>> paramsList) throws IOException  {
-		FormBody.Builder b=new FormBody.Builder();
-		paramsList.forEach(i ->i.forEach((k,v)->b.add(k,v)));
-		RequestBody body =b.build();
-		Request request = new Request.Builder()
-				.url(url)
-				.post(body)
-				.build();
-		return client.newCall(request).execute();
-	}
+    public static Response postList(String url, List<Map<String, String>> paramsList) throws IOException {
+        FormBody.Builder b = new FormBody.Builder();
+        paramsList.forEach(i -> i.forEach((k, v) -> b.add(k, v)));
+        RequestBody body = b.build();
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        return client.newCall(request).execute();
+    }
 
-	/**
-	 * 通过Ip地址获取地理信息
-	 */
-	public static Response getIp(String ip) throws IOException {
-		String url ="http://ip.taobao.com/service/getIpInfo.php?ip=%s";
-		Request request=new Request.Builder()
-				.url(String.format(url, ip))
-				.build();
-		return client.newCall(request).execute();
-	}
+    public static Response getIp(String ip) throws IOException {
+        String url = "http://ip.taobao.com/service/getIpInfo.php?ip=%s";
+        Request request = new Request.Builder()
+                .url(String.format(url, ip))
+                .build();
+        return client.newCall(request).execute();
+    }
 }

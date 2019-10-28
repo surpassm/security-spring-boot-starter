@@ -14,20 +14,31 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface SerializedField {
-	/**
-	 * 需要返回的字段
-	 */
-	String[] includes() default {};
-	/**
-	 * 需要去除的字段
-	 */
-	String[] excludes() default {};
-	/**
-	 * 出参是否加密
-	 */
-	boolean outEncode() default false;
-	/**
-	 * 入参是否解密
-	 */
-	boolean inDecode() default false;
+    /**
+     * 需要返回的字段
+     *
+     * @return String[]
+     */
+    String[] includes() default {};
+
+    /**
+     * 需要去除的字段
+     *
+     * @return String[]
+     */
+    String[] excludes() default {};
+
+    /**
+     * 出参是否加密
+     *
+     * @return boolean
+     */
+    boolean outEncode() default false;
+
+    /**
+     * 入参是否解密
+     *
+     * @return boolean
+     */
+    boolean inDecode() default false;
 }
