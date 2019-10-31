@@ -31,9 +31,6 @@ public class TokenInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String header = request.getHeader(securityProperties.getHeaderKey());
-		if ("/".equals(header)){
-			return false;
-		}
 		if (header != null && header.startsWith(securityProperties.getHeaderValue())) {
 			String token = header.substring(7);
 			request.setAttribute(securityProperties.getHeaderKey(), token);

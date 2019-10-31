@@ -2,8 +2,8 @@ package com.github.surpassm.common.jackson;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.apache.commons.compress.utils.Lists;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,7 +36,7 @@ public class SuccessResult<T extends AbstractBaseDomain> extends AbstractBaseRes
 
 	private void createDataBean(String self, T attributes) {
 		if (data == null) {
-			data = Lists.newArrayList();
+			data = new ArrayList<>();
 		}
 
 		DataBean<T> dataBean = new DataBean<>();
