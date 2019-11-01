@@ -31,6 +31,7 @@ public class SurpassmAuthenctiationFailureHandler extends SimpleUrlAuthenticatio
 
     @Resource
     private SecurityProperties securityProperties;
+
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         logger.info("登录失败");
@@ -38,8 +39,8 @@ public class SurpassmAuthenctiationFailureHandler extends SimpleUrlAuthenticatio
             //设置返回状态码 默认返回状态码为401
             response.setStatus(HttpStatus.OK.value());
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(objectMapper.writeValueAsString(new Result(HttpStatus.UNAUTHORIZED.value(),ResultCode.ERROR.getMsg())));
-        }else{
+            response.getWriter().write(objectMapper.writeValueAsString(new Result(HttpStatus.UNAUTHORIZED.value(), ResultCode.ERROR.getMsg())));
+        } else {
             super.onAuthenticationFailure(request, response, exception);
         }
     }

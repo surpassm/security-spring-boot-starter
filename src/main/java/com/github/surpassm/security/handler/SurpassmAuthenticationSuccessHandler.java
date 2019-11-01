@@ -42,9 +42,6 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    /**
-     * jackson json转换
-     */
     @Resource
     private ObjectMapper objectMapper;
 	@Resource
@@ -102,10 +99,6 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 		Map<String, Object> additionalInformation = new HashMap<>(16);
 		additionalInformation.put("userInfo",principal);
 		((DefaultOAuth2AccessToken)oAuth2AccessToken).setAdditionalInformation(additionalInformation);
-		//设置过期时间
-//		((DefaultOAuth2AccessToken) oAuth2AccessToken).setExpiration(DateUtil.addOneHour(securityProperties.getExpirationToken()));
-		//存入redis缓存中
-//		redisTokenStore.storeAccessToken(oAuth2AccessToken,oAuth2Authentication);
 		//返回前端JSON
 		response.setContentType("application/json;charset=UTF-8");
         response.getWriter().write(objectMapper.writeValueAsString(oAuth2AccessToken));
