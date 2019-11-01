@@ -1,6 +1,7 @@
 package com.github.surpassm.security.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.surpassm.common.jackson.Result;
 import com.github.surpassm.common.tool.util.DateUtil;
 import com.github.surpassm.security.exception.SurpassmAuthenticationException;
 import com.github.surpassm.security.properties.SecurityProperties;
@@ -102,7 +103,7 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
         Map<String, Object> additionalInformation = new HashMap<>(16);
         additionalInformation.put("userInfo", principal);
         ((DefaultOAuth2AccessToken) oAuth2AccessToken).setAdditionalInformation(additionalInformation);
-        response.getWriter().write(objectMapper.writeValueAsString(oAuth2AccessToken));
+        response.getWriter().write(objectMapper.writeValueAsString(new Result(oAuth2AccessToken)));
     }
 
     private String[] extractAndDecodeHeader(String header, HttpServletRequest request)
