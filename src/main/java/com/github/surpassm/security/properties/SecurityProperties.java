@@ -112,7 +112,7 @@ public class SecurityProperties {
 	/**
 	 * OAuth2相关配置
 	 */
-    private Oauth2Properties oAuth2 = new Oauth2Properties();
+    private Oauth2Properties oauth2 = new Oauth2Properties();
 	/**
 	 * 短信验证码
 	 */

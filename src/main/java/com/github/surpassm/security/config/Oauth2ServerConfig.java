@@ -82,8 +82,8 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         //令牌是存入内存中
         InMemoryClientDetailsServiceBuilder builder = clients.inMemory();
-        if (ArrayUtils.isNotEmpty(securityProperties.getOAuth2().getClients())){
-            for(Oauth2ClientProperties config : securityProperties.getOAuth2().getClients()){
+        if (ArrayUtils.isNotEmpty(securityProperties.getOauth2().getClients())){
+            for(Oauth2ClientProperties config : securityProperties.getOauth2().getClients()){
                 builder.withClient(config.getClientId())
                         //herd账号，应用名称
                         .secret(config.getClientIdSecret())

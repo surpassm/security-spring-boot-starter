@@ -47,7 +47,7 @@ public class TokenStoreConfig {
         @Bean
         public JwtAccessTokenConverter jwtAccessTokenConverter(){
             JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
-            accessTokenConverter.setSigningKey(securityProperties.getOAuth2().getSecretKey());
+            accessTokenConverter.setSigningKey(securityProperties.getOauth2().getSecretKey());
             return accessTokenConverter;
         }
 
