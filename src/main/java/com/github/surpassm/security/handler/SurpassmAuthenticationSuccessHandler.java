@@ -100,7 +100,7 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
         OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request, authentication);
         //交由authorizationServerTokenServices 创建token得到令牌
         OAuth2AccessToken oAuth2AccessToken = myDefaultTokenServices.createAccessToken(oAuth2Authentication);
-        Map<String, Object> additionalInformation = new HashMap<>(16);
+        Map<String, Object> additionalInformation = new HashMap<>(1);
         additionalInformation.put("userInfo", principal);
         ((DefaultOAuth2AccessToken) oAuth2AccessToken).setAdditionalInformation(additionalInformation);
         response.getWriter().write(objectMapper.writeValueAsString(new Result(oAuth2AccessToken)));
