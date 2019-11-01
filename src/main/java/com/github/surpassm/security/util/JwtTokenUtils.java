@@ -1,11 +1,14 @@
 package com.github.surpassm.security.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.surpassm.common.tool.util.JsonUtils;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
@@ -119,7 +122,7 @@ public class JwtTokenUtils implements Serializable {
                 //一个map 可以资源存放东西进去
                 .setClaims(claims)
                 //  用户名写入标题
-//                .setSubject(subject)
+                .setSubject(subject)
                 .setId(UUID.randomUUID().toString())
                 .setIssuedAt(new Date())
                 //过期时间
@@ -220,9 +223,8 @@ public class JwtTokenUtils implements Serializable {
                     .getBody();
         } catch (Exception e) {
             claims = null;
+            System.out.println(e);
         }
         return claims;
     }
-
-
 }
