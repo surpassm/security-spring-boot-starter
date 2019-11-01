@@ -87,9 +87,6 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
         } else if (!StringUtils.equals(clientDetails.getClientSecret(), clientSecret)) {
             throw new UnapprovedClientAuthenticationException("clientSecret不匹配" + clientId);
         }
-        if (StringUtils.isEmpty(securityProperties.getOAuth2().getStoreType())) {
-            throw new UnapprovedClientAuthenticationException("请配置TOKEN存储方式->oAuth2-storeType{redis or jwt}");
-        }
         //返回前端JSON
         response.setContentType("application/json;charset=UTF-8");
         //获取登陆成功的当前用户信息
