@@ -122,9 +122,5 @@ public class SecurityProperties {
 	 */
 	private String encryptKey="d7b85f6e214abcda";
 
-	/**
-	 * redis Token过期时间是小时，默认是1个小时
-	 */
-//	private int expirationToken = 1;
 
 }

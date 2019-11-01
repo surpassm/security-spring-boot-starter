@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.surpassm.common.tool.util.DateUtil;
 import com.github.surpassm.security.exception.SurpassmAuthenticationException;
 import com.github.surpassm.security.properties.SecurityProperties;
+import com.github.surpassm.security.util.JwtTokenUtils;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.util.encoders.Base64;
@@ -85,38 +86,42 @@ public class SurpassmAuthenticationSuccessHandler extends SavedRequestAwareAuthe
 		}else if (!StringUtils.equals(clientDetails.getClientSecret(),clientSecret)){
 			throw new UnapprovedClientAuthenticationException("clientSecret不匹配"+clientId);
 		}
-		/**第一套方案（基于redis生成token返回用户标识）*/
-		//创建一个TokenRequest,空MAP、clientId、Scope具备权限、custom自定义grantType标识
-		TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_SORTED_MAP,clientId,clientDetails.getScope(),"custom");
-		//创建OAuth2Request
-		OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
-		//通过OAuth2Request 创建
-		OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request,authentication);
-		//交由authorizationServerTokenServices 创建token得到令牌
-		OAuth2AccessToken oAuth2AccessToken = myDefaultTokenServices.createAccessToken(oAuth2Authentication);
+		if (StringUtils.isEmpty(securityProperties.getOAuth2().getStoreType())){
+			throw new UnapprovedClientAuthenticationException("请配置TOKEN存储方式->oAuth2-storeType{redis or jwt}");
+		}
+		//返回前端JSON
+		response.setContentType("application/json;charset=UTF-8");
 		//获取登陆成功的当前用户信息
 		Object principal = authentication.getPrincipal();
-		Map<String, Object> additionalInformation = new HashMap<>(16);
-		additionalInformation.put("userInfo",principal);
-		((DefaultOAuth2AccessToken)oAuth2AccessToken).setAdditionalInformation(additionalInformation);
-		//返回前端JSON
-		response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().write(objectMapper.writeValueAsString(oAuth2AccessToken));
-        /**第二套方案（基于jwt生成token返回用户标识）*/
-		/*//获取登陆成功的当前用户信息
-		User principal = (User) authentication.getPrincipal();
-		//返回前端JSON
-		response.setContentType("application/json;charset=UTF-8");
-		Map<String, Object> claims = new HashMap<>(16);
-		claims.put("user",principal);
-		//创建token
-		Map<String,String> tokenMap = new HashMap<>(16);
-		tokenMap.put("access_token",JwtTokenUtils.generateAccessToken(principal.getUsername(),claims,clientDetails.getAccessTokenValiditySeconds()));
-		tokenMap.put("expiration",clientDetails.getAccessTokenValiditySeconds()+"");
-		tokenMap.put("token_type","bearer");
-		//返回令牌
-		response.getWriter().write(objectMapper.writeValueAsString(tokenMap));*/
-
+		if ("redis".equals(securityProperties.getOAuth2().getStoreType())){
+			//第一套方案（基于redis生成token返回用户标识）
+			// 创建一个TokenRequest,空MAP、clientId、Scope具备权限、custom自定义grantType标识
+			TokenRequest tokenRequest = new TokenRequest(MapUtils.EMPTY_SORTED_MAP,clientId,clientDetails.getScope(),"custom");
+			//创建OAuth2Request
+			OAuth2Request oAuth2Request = tokenRequest.createOAuth2Request(clientDetails);
+			//通过OAuth2Request 创建
+			OAuth2Authentication oAuth2Authentication = new OAuth2Authentication(oAuth2Request,authentication);
+			//交由authorizationServerTokenServices 创建token得到令牌
+			OAuth2AccessToken oAuth2AccessToken = myDefaultTokenServices.createAccessToken(oAuth2Authentication);
+			Map<String, Object> additionalInformation = new HashMap<>(16);
+			additionalInformation.put("userInfo",principal);
+			((DefaultOAuth2AccessToken)oAuth2AccessToken).setAdditionalInformation(additionalInformation);
+			response.getWriter().write(objectMapper.writeValueAsString(oAuth2AccessToken));
+		}else if("jwt".equals(securityProperties.getOAuth2().getStoreType())){
+			//第二套方案（基于jwt生成token返回用户标识）
+			Map<String, Object> claims = new HashMap<>(1);
+			claims.put("userInfo",principal);
+			//创建token
+			Map<String,Object> tokenMap = new HashMap<>(4);
+			tokenMap.put("access_token", JwtTokenUtils.generateAccessToken(null,claims,clientDetails.getAccessTokenValiditySeconds()));
+			tokenMap.put("expiration",clientDetails.getAccessTokenValiditySeconds()+"");
+			tokenMap.put("token_type","bearer");
+			tokenMap.put("userInfo",principal);
+			//返回令牌
+			response.getWriter().write(objectMapper.writeValueAsString(tokenMap));
+		}else {
+			throw new UnapprovedClientAuthenticationException("配置TOKEN存储方式错误:"+securityProperties.getOAuth2().getStoreType());
+		}
 
     }
 
